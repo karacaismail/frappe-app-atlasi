@@ -1,27 +1,21 @@
 <!doctype html>
 <html lang="tr" data-theme="corporate">
-<!-- Tipografi: Inter (birincil), Roboto / Roboto Mono (ikincil), Google Fonts; her iki aile latin-ext ile Türkçe karakterleri kapsar -->
+<!-- Tipografi: Inter (birincil), Roboto / Roboto Mono (ikincil), Google Fonts; latin-ext ile Türkçe karakter desteği -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Frappe App Atlası</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500&display=swap">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = { theme: { extend: {
-  fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Arial', 'sans-serif'], secondary: ['Roboto', 'ui-sans-serif', 'system-ui', 'Arial', 'sans-serif'], mono: ['"Roboto Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'] },
+  fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','Segoe UI','Arial','sans-serif'], mono: ['"Roboto Mono"','ui-monospace','Menlo','monospace'] },
   colors: {
   primary:'oklch(var(--p)/<alpha-value>)','primary-content':'oklch(var(--pc)/<alpha-value>)',
-  secondary:'oklch(var(--s)/<alpha-value>)','secondary-content':'oklch(var(--sc)/<alpha-value>)',
-  accent:'oklch(var(--a)/<alpha-value>)','accent-content':'oklch(var(--ac)/<alpha-value>)',
-  neutral:'oklch(var(--n)/<alpha-value>)','neutral-content':'oklch(var(--nc)/<alpha-value>)',
   'base-100':'oklch(var(--b1)/<alpha-value>)','base-200':'oklch(var(--b2)/<alpha-value>)','base-300':'oklch(var(--b3)/<alpha-value>)','base-content':'oklch(var(--bc)/<alpha-value>)',
-  info:'oklch(var(--in)/<alpha-value>)','info-content':'oklch(var(--inc)/<alpha-value>)',
-  success:'oklch(var(--su)/<alpha-value>)','success-content':'oklch(var(--suc)/<alpha-value>)',
-  warning:'oklch(var(--wa)/<alpha-value>)','warning-content':'oklch(var(--wac)/<alpha-value>)',
-  error:'oklch(var(--er)/<alpha-value>)','error-content':'oklch(var(--erc)/<alpha-value>)'
+  info:'oklch(var(--in)/<alpha-value>)',success:'oklch(var(--su)/<alpha-value>)',warning:'oklch(var(--wa)/<alpha-value>)',error:'oklch(var(--er)/<alpha-value>)'
 }}}};
 </script>
 <style id="daisy-themes">:root {
@@ -6503,182 +6497,132 @@ details.collapse summary {
   }
 </style>
 <style>
+  :root { --rail-bg: oklch(0.24 0.03 262); --rail-fg: oklch(0.96 0.005 262); --rail-muted: oklch(0.96 0.005 262 / .55); --rail-line: oklch(1 0 0 / .08); --page: oklch(0.975 0.006 262); --card: oklch(1 0 0); --ink: oklch(0.25 0.02 262); }
+  [data-theme="business"] { --rail-bg: oklch(0.17 0.02 262); --rail-fg: oklch(0.95 0.005 262); --rail-muted: oklch(0.95 0.005 262 / .5); --rail-line: oklch(1 0 0 / .07); --page: oklch(0.22 0.015 262); --card: oklch(0.27 0.015 262); --ink: oklch(0.95 0.005 262); }
   html { font-size: 16px; }
-  html, body { height: 100%; margin: 0; overflow: hidden; background: oklch(var(--b2)); color: oklch(var(--bc)); }
+  html, body { height: 100%; margin: 0; overflow: hidden; background: var(--page); color: var(--ink); }
   body { font-family: Inter, ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif; font-size: 1rem; line-height: 1.55; -webkit-font-smoothing: antialiased; }
-  .mono { font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
-  .sec { font-family: Roboto, ui-sans-serif, system-ui, Arial, sans-serif; }
-  .eyebrow { font-family: Roboto, sans-serif; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; color: oklch(var(--bc)/.5); }
-  .muted { color: oklch(var(--bc)/.6); }
-  .hairline { border-color: oklch(var(--bc)/.09); }
-  .surface { background: oklch(var(--b1)); border: 1px solid oklch(var(--bc)/.08); border-radius: 18px; }
-  .tint { background: oklch(var(--p)/.06); border: 1px solid oklch(var(--p)/.14); border-radius: 18px; }
+  .mono { font-family: "Roboto Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .eyebrow { font-family: Roboto, sans-serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; color: oklch(var(--bc)/.5); }
+  .muted { color: oklch(var(--bc)/.62); }
+  .ic { width: 1.1em; height: 1.1em; display: inline-block; vertical-align: -.15em; flex: none; }
 
-  /* left list */
-  #list { padding: 4px 12px 24px; }
-  #list .group-title { padding: 26px 12px 8px; }
-  #list a.item { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 10px 14px; border-radius: 10px; color: inherit; text-decoration: none; position: relative; transition: background .12s; }
-  #list a.item:hover { background: oklch(var(--bc)/.05); }
-  #list a.item.active { background: oklch(var(--p)/.1); }
-  #list a.item.pinned { background: oklch(var(--p)/.16); }
-  #list a.item.pinned::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: oklch(var(--p)); }
-  #list a.item .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .lv { display: inline-block; width: 10px; height: 10px; border-radius: 999px; }
-  .vsq { display: inline-flex; gap: 4px; align-items: center; }
-  .vsq i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; border: 1.5px solid oklch(var(--bc)/.25); }
-  .vsq i.yes { background: oklch(var(--su)); border-color: oklch(var(--su)); }
-  .vsq i.likely { background: oklch(var(--in)/.55); border-color: oklch(var(--in)); }
-  .vsq i.no { background: oklch(var(--er)/.7); border-color: oklch(var(--er)); }
-  .vsq i.na { border-style: dotted; }
+  /* rail */
+  #rail { background: var(--rail-bg); color: var(--rail-fg); }
+  #rail .eyebrow { color: var(--rail-muted); }
+  #rail select { background: oklch(1 0 0 / .08); color: var(--rail-fg); border: 1px solid var(--rail-line); border-radius: 12px; height: 2.75rem; padding: 0 2.4rem 0 .9rem; width: 100%; appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='%23ffffff99'%3E%3Cpath d='M213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80A8 8 0 0 1 53.66 90.34L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .8rem center; background-size: 1rem; }
+  #rail select option { color: #111; background: #fff; }
+  #rail details.more > summary { cursor: pointer; list-style: none; color: var(--rail-muted); display: flex; align-items: center; gap: .5rem; }
+  #rail details.more > summary::-webkit-details-marker { display: none; }
+  #list { padding: 6px 14px 28px; }
+  #list .group { padding: 26px 12px 8px; color: var(--rail-muted); font-family: Roboto, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  #list a.item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 12px; color: inherit; text-decoration: none; transition: background .12s; }
+  #list a.item:hover { background: oklch(1 0 0 / .07); }
+  #list a.item.active { background: oklch(1 0 0 / .12); }
+  #list a.item.pinned { background: oklch(var(--p)); color: oklch(var(--pc)); }
+  #list a.item .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  #list a.item .lv { width: 10px; height: 10px; border-radius: 999px; flex: none; }
+  #list a.item .v16 { font-family: "Roboto Mono", monospace; opacity: .7; }
+  #list a.item.pinned .v16 { opacity: .9; }
+  .railfoot { border-top: 1px solid var(--rail-line); color: var(--rail-muted); }
 
   /* detail */
-  #dhead { padding: 28px 44px 24px; background: oklch(var(--b1)); }
-  #dbody { padding: 32px 44px 72px; background: oklch(var(--b2)); }
-  #dbody > section { max-width: 1040px; margin-bottom: 28px; }
-  #dside { padding: 32px 28px 64px; background: oklch(var(--b1)); }
-  #dside > section { margin-bottom: 36px; }
-  #dside h3 { margin: 0 0 14px; }
-  .kvs dt { color: oklch(var(--bc)/.55); margin-top: 12px; }
-  .kvs dt:first-child { margin-top: 0; }
-  .kvs dd { margin: 2px 0 0; overflow-wrap: anywhere; }
-  .figs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
-  .fig .n { font-size: 1.5rem; font-weight: 500; line-height: 1.15; }
-  .fig .l { color: oklch(var(--bc)/.55); margin-top: 2px; }
-  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; border: 1px solid oklch(var(--bc)/.12); background: oklch(var(--b1)); white-space: nowrap; }
-  .pill.solid { border-color: transparent; }
-  .sw { width: 9px; height: 9px; border-radius: 999px; display: inline-block; }
-  .intro-text { font-size: 1.25rem; line-height: 1.6; max-width: 64ch; margin: 0; }
-  .callout { border-left: 3px solid oklch(var(--p)); padding: 4px 0 4px 18px; max-width: 64ch; }
-  .feat li { display: flex; gap: 12px; align-items: flex-start; }
-  .feat li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 2px; background: oklch(var(--p)); margin-top: .55em; }
-  .score-n { font-size: 3rem; font-weight: 500; line-height: 1; letter-spacing: -.02em; }
+  #detail { background: var(--page); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 56px 96px; }
+  .panel { background: var(--card); border-radius: 22px; border: 1px solid oklch(var(--bc)/.07); box-shadow: 0 1px 2px oklch(var(--bc)/.04), 0 12px 32px -20px oklch(var(--bc)/.25); }
+  .top { padding: 40px 44px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; position: relative; overflow: hidden; }
+  .top::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 6px; background: linear-gradient(90deg, oklch(var(--p)), oklch(var(--p)/.25)); }
+  .top h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 8px 0 0; text-wrap: balance; }
+  .lede { font-size: 1.25rem; line-height: 1.6; max-width: 60ch; margin: 18px 0 0; }
+  .rings { display: flex; gap: 22px; }
+  .gauge { width: 150px; text-align: center; }
+  .gauge svg { width: 118px; height: 118px; display: block; margin: 0 auto; }
+  .gauge .n { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
+  .gauge .l { color: oklch(var(--bc)/.6); margin-top: 6px; }
+  .gauge .lvl { display: inline-block; margin-top: 6px; padding: 3px 12px; border-radius: 999px; font-weight: 500; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid oklch(var(--bc)/.08); }
+  .strip > div { padding: 18px 44px; border-right: 1px solid oklch(var(--bc)/.08); min-width: 0; }
+  .strip > div:last-child { border-right: 0; }
+  .strip .k { color: oklch(var(--bc)/.55); font-family: Roboto, sans-serif; }
+  .strip .v { margin-top: 2px; font-weight: 500; overflow-wrap: anywhere; }
+  .sec { padding: 36px 44px; }
+  .sec h2 { font-size: 1.35rem; font-weight: 600; margin: 0 0 18px; letter-spacing: -.01em; }
+  .callout { border-left: 3px solid oklch(var(--p)); padding: 6px 0 6px 20px; max-width: 64ch; margin-top: 22px; }
+  .feat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .feat li { display: flex; gap: 12px; }
+  .feat li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 3px; background: oklch(var(--p)); margin-top: .6em; }
+  .crow { display: grid; grid-template-columns: 1fr 180px 92px; gap: 16px; align-items: center; padding: 9px 0; }
+  .crow .v { font-family: "Roboto Mono", monospace; white-space: nowrap; text-align: right; }
   .bar { height: 8px; border-radius: 999px; background: oklch(var(--bc)/.1); overflow: hidden; }
   .bar > i { display: block; height: 100%; border-radius: 999px; background: oklch(var(--p)); }
-  .crow { display: grid; grid-template-columns: 1fr 160px 90px; gap: 16px; align-items: center; padding: 8px 0; }
-  .crow .v { font-family: "Roboto Mono", monospace; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
-  .crow .v b { font-weight: 500; }
   .crow.gap .bar > i { background: oklch(var(--wa)); }
   .hint { grid-column: 1 / -1; color: oklch(var(--bc)/.55); margin: -4px 0 6px; }
-  details.fold > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px; color: oklch(var(--p)); }
+  details.fold > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; }
   details.fold > summary::-webkit-details-marker { display: none; }
+  details.fold > summary .car { display: inline-flex; transition: transform .15s; color: oklch(var(--bc)/.5); }
   details.fold[open] > summary .car { transform: rotate(90deg); }
-  .car { display: inline-flex; transition: transform .15s; }
+  .pillx { display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; border-radius: 999px; border: 1px solid oklch(var(--bc)/.12); white-space: nowrap; }
+  .sw { width: 9px; height: 9px; border-radius: 999px; display: inline-block; }
 
   /* wbs */
-  .wbs summary { cursor: pointer; list-style: none; }
-  .wbs summary::-webkit-details-marker { display: none; }
-  .wrow { display: grid; grid-template-columns: 64px 28px 1fr auto; gap: 14px; align-items: center; min-height: 40px; padding: 2px 12px; border-radius: 8px; }
-  .wrow:hover { background: oklch(var(--bc)/.04); }
+  .wrow { display: grid; grid-template-columns: 60px 26px 1fr auto; gap: 14px; align-items: center; min-height: 40px; padding: 2px 12px; border-radius: 10px; }
+  .wrow:hover { background: oklch(var(--bc)/.045); }
   .wrow .num { font-family: "Roboto Mono", monospace; color: oklch(var(--bc)/.45); }
   .wrow .sub { color: oklch(var(--bc)/.5); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  details[open] > summary .car { transform: rotate(90deg); }
-  .wchild { margin-left: 36px; padding-left: 20px; border-left: 1px solid oklch(var(--bc)/.12); }
+  .wbs summary { cursor: pointer; list-style: none; }
+  .wbs summary::-webkit-details-marker { display: none; }
+  .wbs .car { display: inline-flex; transition: transform .15s; color: oklch(var(--bc)/.45); }
+  .wbs[open] > summary .car { transform: rotate(90deg); }
+  .wchild { margin-left: 34px; padding-left: 20px; border-left: 1px solid oklch(var(--bc)/.12); }
   .glyph { width: 18px; height: 18px; display: inline-block; vertical-align: middle; flex: none; }
 
+  .jcard { text-align: left; padding: 24px 26px; border-radius: 18px; background: var(--card); border: 1px solid oklch(var(--bc)/.08); transition: transform .15s, box-shadow .15s, border-color .15s; }
+  .jcard:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -18px oklch(var(--bc)/.4); border-color: oklch(var(--p)/.5); }
   .scrollbar-thin::-webkit-scrollbar { width: 10px; }
-  .scrollbar-thin::-webkit-scrollbar-thumb { background: oklch(var(--bc)/.15); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
-  mark { background: oklch(var(--wa)/.35); color: inherit; border-radius: 2px; padding: 0 1px; }
-  .jcard { text-align: left; padding: 22px 24px; border: 1px solid oklch(var(--bc)/.1); border-radius: 16px; background: oklch(var(--b1)); transition: border-color .15s, transform .15s, box-shadow .15s; }
-  .jcard:hover { border-color: oklch(var(--p)/.5); box-shadow: 0 6px 24px oklch(var(--bc)/.06); transform: translateY(-1px); }
-  .lvl { text-align: left; padding: 16px 18px; border-radius: 14px; border: 1px solid oklch(var(--bc)/.1); background: oklch(var(--b1)); }
-  .lvl:hover { border-color: oklch(var(--p)/.5); }
-  .text-xs, .text-sm, .badge, .kbd, .btn-sm, .select-sm, .input-sm, .table, .table :where(th, td), .toggle, .progress, .pill, .mono, code { font-size: 1rem !important; }
-  .badge { height: auto; padding: 4px 12px; }
-  .kbd-xs { min-height: 1.5rem; padding: 0 .5rem; }
-  .select-sm, .input-sm { height: 2.75rem !important; min-height: 2.75rem; }
-  .btn-sm { height: 2.75rem; min-height: 2.75rem; padding-inline: 1rem; }
-  header { height: 4.5rem !important; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: oklch(var(--bc)/.18); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
+  #rail .scrollbar-thin::-webkit-scrollbar-thumb { background: oklch(1 0 0 / .25); }
+  mark { background: oklch(var(--wa)/.45); color: inherit; border-radius: 2px; }
+  .text-xs, .text-sm, .badge, .kbd, .btn-sm, .input-sm, .toggle, .mono, code { font-size: 1rem !important; }
+  .btn-sm { height: 2.75rem; min-height: 2.75rem; padding-inline: 1.1rem; border-radius: 14px; }
+  .input-sm { height: 2.75rem !important; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
-<div id="app" class="h-screen w-screen flex flex-col overflow-hidden">
+<div class="h-screen w-screen flex flex-col overflow-hidden">
 
-<header class="flex items-center gap-8 px-8 h-16 shrink-0 border-b hairline bg-base-100">
-  <button id="home" class="text-left leading-tight flex items-center gap-3"><svg class="w-6 h-6 opacity-80" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M238.25,229A8,8,0,0,1,227,230.25c-.37-.3-38.82-30.25-99-30.25S29.36,230,29,230.26a8,8,0,0,1-10-12.51c1.63-1.3,38.52-30.26,98.29-33.45A119.94,119.94,0,0,1,114,146.37c1.74-21.71,10.92-50.63,43-72.48A64.65,64.65,0,0,0,140.26,72c-19,.62-30.94,11.71-36.5,33.92A8,8,0,0,1,96,112a7.64,7.64,0,0,1-1.94-.24,8,8,0,0,1-5.82-9.7c9.25-36.95,33.11-45.42,51.5-46a81.48,81.48,0,0,1,21.68,2.45c-3.83-6.33-9.43-12.93-17.21-16.25-10-4.24-22.17-2.39-36.31,5.51a8,8,0,0,1-7.8-14c18.74-10.45,35.72-12.54,50.48-6.2,12.49,5.36,20.73,15.78,25.87,25,6.18-9.64,13.88-16.17,22.39-18.94,11.86-3.87,24.64-.72,38,9.37a8,8,0,0,1-9.64,12.76c-8.91-6.73-16.77-9.06-23.35-6.93-7.29,2.35-12.87,10-16.37,16.61A70.46,70.46,0,0,1,208,73.07c14.61,8.35,32,26.05,32,62.94a8,8,0,0,1-16,0c0-23.46-8.07-40-24-49a50.49,50.49,0,0,0-5.75-2.8,55.64,55.64,0,0,1,5.06,33.06,59.41,59.41,0,0,1-8.86,23.41,8,8,0,0,1-13.09-9.2c.74-1.09,16.33-24.38-3.26-49.37-27,15.21-41.89,37.25-44.16,65.59a104.27,104.27,0,0,0,3.83,36.44c62.65,1.81,101.52,32.33,103.2,33.66A8,8,0,0,1,238.25,229ZM24,140a28,28,0,1,1,28,28A28,28,0,0,1,24,140Zm16,0a12,12,0,1,0,12-12A12,12,0,0,0,40,140Z"/></svg><span>
-    <div class="font-semibold text-lg">Frappe App Atlası</div>
-    <div class="text-xs muted">Kod tabanından türetilmiş envanter · 2026-09-15</div></span>
-  </button>
-  <div class="ml-auto flex items-center gap-4">
-    <label class="input input-bordered input-sm h-9 flex items-center gap-3 w-80 rounded-lg">
-      <svg class="w-4 h-4 opacity-50" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
-      <input id="q" class="grow bg-transparent" placeholder="Ara: ad, repo, app_name, not">
-      <kbd class="kbd kbd-xs">/</kbd>
-    </label>
-    <label class="flex items-center gap-2 text-sm muted cursor-pointer select-none">
-      <input type="checkbox" id="themeToggle" class="toggle toggle-sm">
-      <span>Koyu</span>
-    </label>
+<header class="flex items-center gap-8 px-8 shrink-0 border-b border-base-content/10 bg-base-100" style="height:4.5rem">
+  <button id="home" class="text-left leading-tight flex items-center gap-3"><svg class="ic text-2xl opacity-80" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M238.25,229A8,8,0,0,1,227,230.25c-.37-.3-38.82-30.25-99-30.25S29.36,230,29,230.26a8,8,0,0,1-10-12.51c1.63-1.3,38.52-30.26,98.29-33.45A119.94,119.94,0,0,1,114,146.37c1.74-21.71,10.92-50.63,43-72.48A64.65,64.65,0,0,0,140.26,72c-19,.62-30.94,11.71-36.5,33.92A8,8,0,0,1,96,112a7.64,7.64,0,0,1-1.94-.24,8,8,0,0,1-5.82-9.7c9.25-36.95,33.11-45.42,51.5-46a81.48,81.48,0,0,1,21.68,2.45c-3.83-6.33-9.43-12.93-17.21-16.25-10-4.24-22.17-2.39-36.31,5.51a8,8,0,0,1-7.8-14c18.74-10.45,35.72-12.54,50.48-6.2,12.49,5.36,20.73,15.78,25.87,25,6.18-9.64,13.88-16.17,22.39-18.94,11.86-3.87,24.64-.72,38,9.37a8,8,0,0,1-9.64,12.76c-8.91-6.73-16.77-9.06-23.35-6.93-7.29,2.35-12.87,10-16.37,16.61A70.46,70.46,0,0,1,208,73.07c14.61,8.35,32,26.05,32,62.94a8,8,0,0,1-16,0c0-23.46-8.07-40-24-49a50.49,50.49,0,0,0-5.75-2.8,55.64,55.64,0,0,1,5.06,33.06,59.41,59.41,0,0,1-8.86,23.41,8,8,0,0,1-13.09-9.2c.74-1.09,16.33-24.38-3.26-49.37-27,15.21-41.89,37.25-44.16,65.59a104.27,104.27,0,0,0,3.83,36.44c62.65,1.81,101.52,32.33,103.2,33.66A8,8,0,0,1,238.25,229ZM24,140a28,28,0,1,1,28,28A28,28,0,0,1,24,140Zm16,0a12,12,0,1,0,12-12A12,12,0,0,0,40,140Z"/></svg><span><div class="font-semibold text-lg">Frappe App Atlası</div><div class="muted">215 uygulama · kod tabanından türetilmiş · 2026-09-15</div></span></button>
+  <div class="ml-auto flex items-center gap-5">
+    <label class="input input-bordered input-sm flex items-center gap-3 w-80 rounded-xl"><svg class="ic opacity-50" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg><input id="q" class="grow bg-transparent" placeholder="Uygulama ara"><kbd class="kbd kbd-xs">/</kbd></label>
+    <label class="flex items-center gap-2 muted cursor-pointer select-none"><input type="checkbox" id="themeToggle" class="toggle toggle-sm"><span>Koyu</span></label>
   </div>
 </header>
 
 <div class="flex flex-1 min-h-0">
-  <aside id="left" class="flex flex-col bg-base-100 border-r hairline shrink-0" style="width:360px;min-width:280px;max-width:60vw">
-    <div class="px-6 pt-5 pb-4 border-b hairline shrink-0">
-      <div class="flex items-baseline justify-between mb-3">
-        <span class="eyebrow">Filtreler</span>
-        <button id="reset" class="text-xs link link-hover muted">Sıfırla</button>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <select id="fCat" class="select select-bordered select-sm h-9 rounded-lg col-span-2"><option value="">Tüm kategoriler</option></select>
-        <select id="fMat" class="select select-bordered select-sm h-9 rounded-lg">
-          <option value="">Olgunluk</option>
-          <option value="enterprise">Enterprise / Olgunluk</option>
-          <option value="mature">Olgun</option>
-          <option value="growth">Büyüyen</option>
-          <option value="early">Erken ürün</option>
-          <option value="mvp">MVP</option>
-          <option value="legacy">Legacy / Arşiv</option>
-          <option value="unknown">Bilinmiyor</option>
-        </select>
-        <select id="fVer" class="select select-bordered select-sm h-9 rounded-lg">
-          <option value="">Sürüm</option>
-          <option value="v16y">v16 dalı var</option>
-          <option value="v16l">v16 var veya olası</option>
-          <option value="v15y">v15 dalı var</option>
-          <option value="v15l">v15 var veya olası</option>
-          <option value="old">Eski hat (v13/v14)</option>
-        </select>
-        <select id="fLic" class="select select-bordered select-sm h-9 rounded-lg">
-          <option value="">Lisans</option>
-          <option>MIT</option><option>GPL</option><option>AGPL</option><option>Apache</option><option>Diğer</option><option>Tescilli</option><option>Bilinmiyor</option>
-        </select>
-        <select id="fFeat" class="select select-bordered select-sm h-9 rounded-lg">
-          <option value="">Özellik zenginliği</option>
-          <option value="platform">Platform</option>
-          <option value="comprehensive">Kapsamlı</option>
-          <option value="rich">Zengin</option>
-          <option value="standard">Standart</option>
-          <option value="basic">Temel</option>
-        </select>
-        <select id="fOwn" class="select select-bordered select-sm h-9 rounded-lg">
-          <option value="">Kaynak</option>
-          <option value="official">Resmi Frappe</option>
-          <option value="community">Topluluk / üçüncü taraf</option>
-          <option value="repo">Kodu incelendi</option>
-          <option value="norepo">Repo bulunamadı</option>
-        </select>
-      </div>
+  <aside id="rail" class="flex flex-col shrink-0" style="width:340px;min-width:280px;max-width:50vw">
+    <div class="px-6 pt-6 pb-4 grid gap-3">
+      <select id="fCat"></select>
+      <select id="fMat">
+        <option value="">Her olgunluk seviyesi</option>
+        <option value="enterprise">Enterprise / Olgunluk</option><option value="mature">Olgun</option><option value="growth">Büyüyen</option><option value="early">Erken ürün</option><option value="mvp">MVP</option><option value="legacy">Legacy / Arşiv</option><option value="unknown">Bilinmiyor</option>
+      </select>
+      <details class="more"><summary><span class="car"><svg class="ic" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></span>Daha fazla filtre</summary>
+        <div class="grid gap-3 mt-3">
+          <select id="fFeat"><option value="">Her özellik seviyesi</option><option value="platform">Platform</option><option value="comprehensive">Kapsamlı</option><option value="rich">Zengin</option><option value="standard">Standart</option><option value="basic">Temel</option></select>
+          <select id="fVer"><option value="">Her Frappe sürümü</option><option value="v16y">v16 dalı var</option><option value="v16l">v16 var veya olası</option><option value="v15y">v15 dalı var</option><option value="old">Eski hat (v13/v14)</option></select>
+          <select id="fLic"><option value="">Her lisans</option><option>MIT</option><option>GPL</option><option>AGPL</option><option>Apache</option><option>Diğer</option><option>Tescilli</option><option>Bilinmiyor</option></select>
+          <select id="fOwn"><option value="">Resmi ve topluluk</option><option value="official">Yalnızca resmi Frappe</option><option value="community">Yalnızca topluluk</option><option value="repo">Kodu incelenenler</option><option value="norepo">Repo bulunamayanlar</option></select>
+          <button id="reset" class="text-left" style="color:var(--rail-muted)">Filtreleri sıfırla</button>
+        </div>
+      </details>
     </div>
     <div id="list" class="flex-1 overflow-y-auto scrollbar-thin"></div>
-    <div class="px-6 py-4 border-t hairline shrink-0 flex flex-col gap-2 muted">
-      <span id="shown"></span>
-      <span class="flex items-center flex-wrap gap-x-5 gap-y-1">
-        <span class="vsq"><i class="yes"></i> dal var</span>
-        <span class="vsq"><i class="likely"></i> olası</span>
-        <span class="vsq"><i class="no"></i> yok</span>
-        <span class="vsq"><i></i> belirsiz</span>
-      </span>
-    </div>
+    <div class="railfoot px-6 py-3 flex items-center justify-between"><span id="shown"></span><span class="mono">16 = v16 dalı</span></div>
   </aside>
-  <div id="split" class="w-[5px] cursor-col-resize bg-transparent hover:bg-primary/40 transition-colors shrink-0"></div>
-  <main class="flex-1 min-w-0 flex flex-col bg-base-200">
-    <div id="dhead" class="border-b hairline shrink-0"></div>
-    <div class="flex flex-1 min-h-0">
-      <div id="dbody" class="flex-1 min-w-0 overflow-y-auto scrollbar-thin"></div>
-      <aside id="dside" class="shrink-0 border-l hairline overflow-y-auto scrollbar-thin bg-base-100" style="width:380px"></aside>
-    </div>
-  </main>
+  <div id="split" class="w-[5px] cursor-col-resize hover:bg-primary/40 transition-colors shrink-0"></div>
+  <main id="detail" class="flex-1 min-w-0 overflow-y-auto scrollbar-thin"><div class="wrap" id="dbody"></div></main>
 </div>
 </div>
 
@@ -6686,50 +6630,38 @@ details.collapse summary {
 <script>
 const DATA = JSON.parse(document.getElementById('data').textContent);
 const byId = Object.fromEntries(DATA.map(d => [d.id, d]));
+const I = {"search": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z\"/></svg>", "island": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M238.25,229A8,8,0,0,1,227,230.25c-.37-.3-38.82-30.25-99-30.25S29.36,230,29,230.26a8,8,0,0,1-10-12.51c1.63-1.3,38.52-30.26,98.29-33.45A119.94,119.94,0,0,1,114,146.37c1.74-21.71,10.92-50.63,43-72.48A64.65,64.65,0,0,0,140.26,72c-19,.62-30.94,11.71-36.5,33.92A8,8,0,0,1,96,112a7.64,7.64,0,0,1-1.94-.24,8,8,0,0,1-5.82-9.7c9.25-36.95,33.11-45.42,51.5-46a81.48,81.48,0,0,1,21.68,2.45c-3.83-6.33-9.43-12.93-17.21-16.25-10-4.24-22.17-2.39-36.31,5.51a8,8,0,0,1-7.8-14c18.74-10.45,35.72-12.54,50.48-6.2,12.49,5.36,20.73,15.78,25.87,25,6.18-9.64,13.88-16.17,22.39-18.94,11.86-3.87,24.64-.72,38,9.37a8,8,0,0,1-9.64,12.76c-8.91-6.73-16.77-9.06-23.35-6.93-7.29,2.35-12.87,10-16.37,16.61A70.46,70.46,0,0,1,208,73.07c14.61,8.35,32,26.05,32,62.94a8,8,0,0,1-16,0c0-23.46-8.07-40-24-49a50.49,50.49,0,0,0-5.75-2.8,55.64,55.64,0,0,1,5.06,33.06,59.41,59.41,0,0,1-8.86,23.41,8,8,0,0,1-13.09-9.2c.74-1.09,16.33-24.38-3.26-49.37-27,15.21-41.89,37.25-44.16,65.59a104.27,104.27,0,0,0,3.83,36.44c62.65,1.81,101.52,32.33,103.2,33.66A8,8,0,0,1,238.25,229ZM24,140a28,28,0,1,1,28,28A28,28,0,0,1,24,140Zm16,0a12,12,0,1,0,12-12A12,12,0,0,0,40,140Z\"/></svg>", "mountain": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M164,80a28,28,0,1,0-28-28A28,28,0,0,0,164,80Zm0-40a12,12,0,1,1-12,12A12,12,0,0,1,164,40Zm90.88,155.92-54.56-92.08A15.87,15.87,0,0,0,186.55,96h0a15.85,15.85,0,0,0-13.76,7.84L146.63,148l-44.84-76.1a16,16,0,0,0-27.58,0L1.11,195.94A8,8,0,0,0,8,208H248a8,8,0,0,0,6.88-12.08ZM88,80l23.57,40H64.43ZM22,192l33-56h66l18.74,31.8,0,0L154,192Zm150.57,0-16.66-28.28L186.55,112,234,192Z\"/></svg>", "rock": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M232,80.18v95.64a16,16,0,0,1-8.32,14l-88,48.17a15.88,15.88,0,0,1-15.36,0l-88-48.17a16,16,0,0,1-8.32-14V80.18a16,16,0,0,1,8.32-14l88-48.17a15.88,15.88,0,0,1,15.36,0l88,48.17A16,16,0,0,1,232,80.18Z\"/></svg>", "boulder": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z\"/></svg>", "pebble": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z\"/></svg>", "sand": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M156,128a28,28,0,1,1-28-28A28,28,0,0,1,156,128ZM48,100a28,28,0,1,0,28,28A28,28,0,0,0,48,100Zm160,0a28,28,0,1,0,28,28A28,28,0,0,0,208,100Z\"/></svg>", "caret": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z\"/></svg>", "pin": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z\"/></svg>", "pinf": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M235.33,104l-53.47,53.65c4.56,12.67,6.45,33.89-13.19,60A15.93,15.93,0,0,1,157,224c-.38,0-.75,0-1.13,0a16,16,0,0,1-11.32-4.69L96.29,171,53.66,213.66a8,8,0,0,1-11.32-11.32L85,159.71l-48.3-48.3A16,16,0,0,1,38,87.63c25.42-20.51,49.75-16.48,60.4-13.14L152,20.7a16,16,0,0,1,22.63,0l60.69,60.68A16,16,0,0,1,235.33,104Z\"/></svg>", "gh": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z\"/></svg>", "out": "<svg class=\"ic\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z\"/></svg>"};
 const MAT = {
-  enterprise:{l:'Enterprise / Olgunluk', v:'--su', d:'Geniş kapsam, testler, CI, sürüm dalları, güçlü benimseme'},
-  mature:{l:'Olgun', v:'--in', d:'Kapsamı için tam; bakım ve sürüm takibi düzenli'},
-  growth:{l:'Büyüyen', v:'--p', d:'Aktif; testler, kapsam veya benimseme henüz orta'},
-  early:{l:'Erken ürün', v:'--wa', d:'Çalışır, dar kapsam, az test; önce PoC'},
-  mvp:{l:'MVP', v:'--er', d:'İlk sürüm; üretim bağımlılığı yapmayın'},
-  legacy:{l:'Legacy / Arşiv', v:'--n', d:'Arşivlenmiş veya iki yıldan uzun süredir commit yok'},
-  unknown:{l:'Bilinmiyor', v:'--b3', d:'Public repo bulunamadı; kod incelenmedi'},
+  enterprise:{l:'Enterprise', v:'--su', d:'Geniş kapsam, testler, CI, sürüm dalları ve güçlü benimseme. Üretimde güvenle kullanılır.'},
+  mature:{l:'Olgun', v:'--in', d:'Kapsamı için tam; bakım ve sürüm takibi düzenli.'},
+  growth:{l:'Büyüyen', v:'--p', d:'Aktif geliştirme; testler, kapsam veya benimseme henüz orta.'},
+  early:{l:'Erken ürün', v:'--wa', d:'Çalışır ama dar kapsam ve az test; önce pilot yapın.'},
+  mvp:{l:'MVP', v:'--er', d:'İlk sürüm; üretim bağımlılığı yapmayın.'},
+  legacy:{l:'Legacy', v:'--n', d:'Arşivlenmiş veya iki yıldır commit yok.'},
+  unknown:{l:'Bilinmiyor', v:'--b3', d:'Public repo bulunamadı; kod incelenmedi.'},
 };
 const FL = {
-  platform:{l:'Platform', v:'--su', d:'Hedef kitlenin tüm iş akışını kapsar; ek ürün gerektirmez'},
-  comprehensive:{l:'Kapsamlı', v:'--in', d:'Ana senaryolar ve raporlama eksiksiz'},
-  rich:{l:'Zengin', v:'--p', d:'Temel işin ötesinde otomasyon, rapor ve ayarlar var'},
-  standard:{l:'Standart', v:'--wa', d:'Beklenen temel işi yapar; çevresi ince'},
-  basic:{l:'Temel', v:'--er', d:'Tek bir işi yapar; dar özellik seti'},
-  unknown:{l:'Bilinmiyor', v:'--b3', d:'Kod incelenmedi'},
+  platform:{l:'Platform', v:'--su', d:'Hedef kitlenin tüm iş akışını kapsar.'},
+  comprehensive:{l:'Kapsamlı', v:'--in', d:'Ana senaryolar ve raporlama eksiksiz.'},
+  rich:{l:'Zengin', v:'--p', d:'Temel işin ötesinde otomasyon, rapor ve ayarlar.'},
+  standard:{l:'Standart', v:'--wa', d:'Beklenen temel işi yapar; çevresi ince.'},
+  basic:{l:'Temel', v:'--er', d:'Tek bir işi yapar; dar özellik seti.'},
+  unknown:{l:'Bilinmiyor', v:'--b3', d:'Kod incelenmedi.'},
 };
 const VS = {yes:'dal var', likely:'olası', no:'yok', unknown:'belirsiz', na:'uygulanmaz'};
-const VSC = {yes:'badge-success', likely:'badge-info', no:'badge-error', unknown:'badge-ghost', na:'badge-ghost'};
-const SCALE = {island:'Ada', mountain:'Dağ', rock:'Kaya', boulder:'Büyük taş', pebble:'Küçük taş', sand:'Kum'};
-const G = {
-  island:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M238.25,229A8,8,0,0,1,227,230.25c-.37-.3-38.82-30.25-99-30.25S29.36,230,29,230.26a8,8,0,0,1-10-12.51c1.63-1.3,38.52-30.26,98.29-33.45A119.94,119.94,0,0,1,114,146.37c1.74-21.71,10.92-50.63,43-72.48A64.65,64.65,0,0,0,140.26,72c-19,.62-30.94,11.71-36.5,33.92A8,8,0,0,1,96,112a7.64,7.64,0,0,1-1.94-.24,8,8,0,0,1-5.82-9.7c9.25-36.95,33.11-45.42,51.5-46a81.48,81.48,0,0,1,21.68,2.45c-3.83-6.33-9.43-12.93-17.21-16.25-10-4.24-22.17-2.39-36.31,5.51a8,8,0,0,1-7.8-14c18.74-10.45,35.72-12.54,50.48-6.2,12.49,5.36,20.73,15.78,25.87,25,6.18-9.64,13.88-16.17,22.39-18.94,11.86-3.87,24.64-.72,38,9.37a8,8,0,0,1-9.64,12.76c-8.91-6.73-16.77-9.06-23.35-6.93-7.29,2.35-12.87,10-16.37,16.61A70.46,70.46,0,0,1,208,73.07c14.61,8.35,32,26.05,32,62.94a8,8,0,0,1-16,0c0-23.46-8.07-40-24-49a50.49,50.49,0,0,0-5.75-2.8,55.64,55.64,0,0,1,5.06,33.06,59.41,59.41,0,0,1-8.86,23.41,8,8,0,0,1-13.09-9.2c.74-1.09,16.33-24.38-3.26-49.37-27,15.21-41.89,37.25-44.16,65.59a104.27,104.27,0,0,0,3.83,36.44c62.65,1.81,101.52,32.33,103.2,33.66A8,8,0,0,1,238.25,229ZM24,140a28,28,0,1,1,28,28A28,28,0,0,1,24,140Zm16,0a12,12,0,1,0,12-12A12,12,0,0,0,40,140Z"/></svg>',
-  mountain:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M164,80a28,28,0,1,0-28-28A28,28,0,0,0,164,80Zm0-40a12,12,0,1,1-12,12A12,12,0,0,1,164,40Zm90.88,155.92-54.56-92.08A15.87,15.87,0,0,0,186.55,96h0a15.85,15.85,0,0,0-13.76,7.84L146.63,148l-44.84-76.1a16,16,0,0,0-27.58,0L1.11,195.94A8,8,0,0,0,8,208H248a8,8,0,0,0,6.88-12.08ZM88,80l23.57,40H64.43ZM22,192l33-56h66l18.74,31.8,0,0L154,192Zm150.57,0-16.66-28.28L186.55,112,234,192Z"/></svg>',
-  rock:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M232,80.18v95.64a16,16,0,0,1-8.32,14l-88,48.17a15.88,15.88,0,0,1-15.36,0l-88-48.17a16,16,0,0,1-8.32-14V80.18a16,16,0,0,1,8.32-14l88-48.17a15.88,15.88,0,0,1,15.36,0l88,48.17A16,16,0,0,1,232,80.18Z"/></svg>',
-  boulder:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"/></svg>',
-  pebble:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Z"/></svg>',
-  sand:'<svg class="glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M156,128a28,28,0,1,1-28-28A28,28,0,0,1,156,128ZM48,100a28,28,0,1,0,28,28A28,28,0,0,0,48,100Zm160,0a28,28,0,1,0,28,28A28,28,0,0,0,208,100Z"/></svg>'
-};
+const G = {island:I.island.replace('class="ic"','class="glyph"'), mountain:I.mountain.replace('class="ic"','class="glyph"'), rock:I.rock.replace('class="ic"','class="glyph"'), boulder:I.boulder.replace('class="ic"','class="glyph"'), pebble:I.pebble.replace('class="ic"','class="glyph"'), sand:I.sand.replace('class="ic"','class="glyph"')};
 const CAT_ORDER = ['official','core','vertical','locale','integration','storage','identity','devtools','lib','ai','commercial','legacy'];
 const JOURNEYS = [
-  {t:'Türkiye’de ERPNext', d:'e-Fatura, TCMB, LOGO, kargo ve pazaryeri bağlantıları', f:{q:'logedosoft|turkish|trendyol|yurtiçi|mng kargo|raspel|logo tiger'}},
-  {t:'Uyum ve e-fatura', d:'Ülke yerelleştirmeleri, vergi ve e-fatura paketleri', f:{cat:'locale'}},
-  {t:'POS, perakende, restoran', d:'POS ve dikey çözümler', f:{q:'pos|ury|restoran|getpos|perakende'}},
-  {t:'Resmi Frappe ürünleri', d:'frappe organizasyonunun geliştirdiği uygulamalar', f:{own:'official'}},
-  {t:'v16’ya hazır olanlar', d:'version-16 dalı taşıyan repolar', f:{ver:'v16y'}},
-  {t:'Enterprise olgunluk', d:'Üretimde güvenle kullanılabilir', f:{mat:'enterprise'}},
-  {t:'Entegrasyon ve mesajlaşma', d:'WhatsApp, WooCommerce, banka, SMS', f:{cat:'integration'}},
-  {t:'AI ve LLM', d:'Asistanlar, MCP sunucuları, OCR', f:{cat:'ai'}},
-  {t:'Geliştirici ve DevOps', d:'SDK, CLI, tema, deploy araçları', f:{cat:'devtools,lib'}},
-  {t:'Depolama ve kimlik', d:'S3, NextCloud, OIDC', f:{cat:'storage,identity'}},
-  {t:'Kaçınılacaklar', d:'Arşivlenmiş veya terk edilmiş hatlar', f:{mat:'legacy'}},
-  {t:'Kodu incelenemeyenler', d:'Yalnızca Marketplace’te olan paketler', f:{own:'norepo'}},
+  {t:'Türkiye’de ERPNext', d:'e-Fatura, TCMB, LOGO, kargo, pazaryeri', f:{q:'logedosoft|turkish|trendyol|yurtiçi|mng kargo|raspel|logo tiger'}},
+  {t:'Uyum ve e-fatura', d:'Ülke yerelleştirmeleri', f:{cat:'locale'}},
+  {t:'POS ve perakende', d:'Kasa, restoran, mağaza', f:{q:'pos|ury|restoran|getpos|perakende'}},
+  {t:'Resmi Frappe ürünleri', d:'frappe organizasyonu', f:{own:'official'}},
+  {t:'Üretime hazır', d:'Enterprise seviyesi', f:{mat:'enterprise'}},
+  {t:'v16 dalı olanlar', d:'Sürüm 16 için hazır', f:{ver:'v16y'}},
+  {t:'Entegrasyonlar', d:'WhatsApp, WooCommerce, banka', f:{cat:'integration'}},
+  {t:'AI ve LLM', d:'Asistanlar, MCP, OCR', f:{cat:'ai'}},
+  {t:'Geliştirici araçları', d:'SDK, CLI, deploy', f:{cat:'devtools,lib'}},
 ];
-
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = n => n == null ? '–' : Number(n).toLocaleString('tr-TR');
@@ -6745,292 +6677,174 @@ function matches(d) {
   if (state.own === 'community' && d.official) return false;
   if (state.own === 'repo' && !d.code) return false;
   if (state.own === 'norepo' && d.code) return false;
-  if (state.ver) {
-    const v = d.vs;
+  if (state.ver) { const v = d.vs;
     if (state.ver === 'v16y' && v.v16 !== 'yes') return false;
     if (state.ver === 'v16l' && !['yes','likely'].includes(v.v16)) return false;
     if (state.ver === 'v15y' && v.v15 !== 'yes') return false;
-    if (state.ver === 'v15l' && !['yes','likely'].includes(v.v15)) return false;
-    if (state.ver === 'old' && !(v.v16 === 'no' || d.maturity === 'legacy')) return false;
-  }
-  if (state.q) {
-    const hay = [d.name, d.repo, d.appName, d.appTitle, d.note, d.publisher, d.catLabel, d.gh && d.gh.description].join(' ').toLowerCase();
+    if (state.ver === 'old' && !(v.v16 === 'no' || d.maturity === 'legacy')) return false; }
+  if (state.q) { const hay = [d.name, d.repo, d.appName, d.appTitle, d.note, d.publisher, d.catLabel, d.ptype, d.gh && d.gh.description].join(' ').toLowerCase();
     const parts = state.q.toLowerCase().split('|').map(s => s.trim()).filter(Boolean);
-    if (!parts.some(p => hay.includes(p))) return false;
-  }
+    if (!parts.some(p => hay.includes(p))) return false; }
   return true;
 }
-function hl(text) {
-  if (!state.q) return esc(text);
-  let out = esc(text);
-  state.q.toLowerCase().split('|').map(s => s.trim()).filter(Boolean).forEach(p => { out = out.replace(new RegExp('(' + p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); });
-  return out;
-}
-const vsq = d => `<span class="vsq" title="Frappe 15: ${VS[d.vs.v15]} · Frappe 16: ${VS[d.vs.v16]}"><i class="${d.vs.v15}"></i><i class="${d.vs.v16}"></i></span>`;
+function hl(text) { if (!state.q) return esc(text); let out = esc(text);
+  state.q.toLowerCase().split('|').map(s => s.trim()).filter(Boolean).forEach(p => { out = out.replace(new RegExp('(' + p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return out; }
 
 function renderList() {
-  const vis = DATA.filter(matches);
-  state.visible = vis.map(d => d.id);
-  const groups = {};
-  vis.forEach(d => (groups[d.cat] ||= []).push(d));
+  const vis = DATA.filter(matches); state.visible = vis.map(d => d.id);
+  const groups = {}; vis.forEach(d => (groups[d.cat] ||= []).push(d));
   let html = '';
-  CAT_ORDER.forEach(c => {
-    if (!groups[c]) return;
-    html += `<div class="group-title eyebrow">${esc(labelCat(c))} <span class="font-normal opacity-70">${groups[c].length}</span></div>`;
+  CAT_ORDER.forEach(c => { if (!groups[c]) return;
+    html += `<div class="group">${esc(labelCat(c))} · ${groups[c].length}</div>`;
     groups[c].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'tr')).forEach(d => {
       const cur = (state.pinned || state.hover) === d.id;
-      html += `<a href="#" data-id="${d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''}" title="Teknik güven: ${esc(MAT[d.maturity].l)} · Özellik: ${esc(FL[d.feat.level].l)}">
-        <span class="name flex items-center gap-3"><span class="lv" style="background:oklch(var(${MAT[d.maturity].v}))"></span><span class="truncate">${hl(d.name)}</span></span>
-        ${vsq(d)}
-      </a>`;
-    });
-  });
-  if (!vis.length) html = '<div class="p-8 text-center muted">Eşleşen uygulama yok.</div>';
-  $('#list').innerHTML = html;
-  $('#shown').textContent = `${vis.length} / ${DATA.length} uygulama`;
+      html += `<a href="#" data-id="${d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''}" title="${esc(MAT[d.maturity].l)} · ${esc(FL[d.feat.level].l)}"><span class="lv" style="background:oklch(var(${MAT[d.maturity].v}))"></span><span class="name">${hl(d.name)}</span>${d.vs.v16 === 'yes' ? '<span class="v16">16</span>' : ''}</a>`; }); });
+  if (!vis.length) html = '<div class="p-8 text-center" style="color:var(--rail-muted)">Eşleşen uygulama yok.</div>';
+  $('#list').innerHTML = html; $('#shown').textContent = `${vis.length} / ${DATA.length} uygulama`;
   $('#list').querySelectorAll('a[data-id]').forEach(a => {
     a.addEventListener('mouseenter', () => { if (!state.pinned) { state.hover = a.dataset.id; show(a.dataset.id, false); markActive(); } });
-    a.addEventListener('click', e => { e.preventDefault(); togglePin(a.dataset.id); });
-  });
+    a.addEventListener('click', e => { e.preventDefault(); togglePin(a.dataset.id); }); });
   if (state.pinned && !state.visible.includes(state.pinned)) state.pinned = null;
 }
-function markActive() {
-  const cur = state.pinned || state.hover;
-  $('#list').querySelectorAll('a[data-id]').forEach(a => { a.classList.toggle('active', a.dataset.id === cur); a.classList.toggle('pinned', a.dataset.id === state.pinned); });
-}
-function togglePin(id) {
-  state.pinned = state.pinned === id ? null : id;
-  state.hover = id; show(id, !!state.pinned); markActive();
-  if (state.pinned) { const a = $('#list a[data-id="' + id + '"]'); a && a.scrollIntoView({block:'nearest'}); }
-}
+function markActive() { const cur = state.pinned || state.hover; $('#list').querySelectorAll('a[data-id]').forEach(a => { a.classList.toggle('active', a.dataset.id === cur); a.classList.toggle('pinned', a.dataset.id === state.pinned); }); }
+function togglePin(id) { state.pinned = state.pinned === id ? null : id; state.hover = id; show(id, !!state.pinned); markActive(); if (state.pinned) { const a = $('#list a[data-id="' + id + '"]'); a && a.scrollIntoView({block:'nearest'}); } }
 
-const badge = (txt, cls = 'badge-ghost', title = '') => `<span class="badge ${cls} badge-md whitespace-nowrap" title="${esc(title)}">${txt}</span>`;
-const fig = (n, l, s = '') => `<div class="fig"><div class="n mono">${n}</div><div class="l">${l}</div>${s ? `<div class="s">${s}</div>` : ''}</div>`;
-const section = (title, body, extra = '') => `<section><div class="flex items-baseline gap-4 mb-4"><h3 class="eyebrow">${title}</h3>${extra}</div>${body}</section>`;
-const mpill = m => `<span class="pill" title="Teknik güven seviyesi"><span class="sw" style="background:oklch(var(${m.v}))"></span>Teknik: ${esc(m.l)}</span>`;
-const fpill = f => `<span class="pill" title="Özellik zenginliği (hedef kitleye göre)"><span class="sw" style="border:2px solid oklch(var(${f.v}))"></span>Özellik: ${esc(f.l)}</span>`;
+const ring = (score, lvl, label) => { const r = 50, c = 2 * Math.PI * r, v = Math.max(0, Math.min(100, score || 0));
+  return `<div class="gauge"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="${r}" fill="none" stroke="oklch(var(--bc)/.1)" stroke-width="10"/><circle cx="60" cy="60" r="${r}" fill="none" stroke="oklch(var(${lvl.v}))" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - v / 100)}" transform="rotate(-90 60 60)"/><text x="60" y="60" text-anchor="middle" dominant-baseline="central" class="n" fill="currentColor" font-family="Inter, sans-serif" font-size="30" font-weight="700">${score == null ? '–' : score}</text></svg><div class="l">${label}</div><span class="lvl" style="background:oklch(var(${lvl.v})/.16)">${esc(lvl.l)}</span></div>`; };
+const comp = (parts, gaps) => { const g = Object.fromEntries((gaps || []).map(x => [x.k, x]));
+  return Object.entries(parts || {}).map(([k, v]) => { const gap = g[k]; return `<div class="crow ${gap ? 'gap' : ''}"><span>${esc(k)}</span><span class="bar"><i style="width:${v[1] ? Math.round(v[0] / v[1] * 100) : 0}%"></i></span><span class="v"><b>${v[0]}</b> / ${v[1]}</span>${gap ? `<div class="hint">Eksik ${gap.max - gap.got}: ${esc(gap.hint)}${gap.note ? ' · ' + esc(gap.note) : ''}</div>` : ''}</div>`; }).join(''); };
 
 function show(id, pinned) {
   const d = byId[id]; if (!d) return;
-  const m = MAT[d.maturity], f = d.feat, fl = FL[f.level];
-  const vtxt = `Frappe 15 ${VS[d.vs.v15]} · 16 ${VS[d.vs.v16]}`;
-  $('#dhead').innerHTML = `
-    <div class="flex items-start gap-6">
+  const m = MAT[d.maturity], f = d.feat, fl = FL[f.level], c = d.code;
+  const feats = (d.features && d.features.length) ? d.features : (c && c.modules && c.modules.length ? c.modules.slice(0, 6).map(x => x.name + ' modülü') : []);
+  let h = `<article class="panel">
+    <div class="top">
       <div class="min-w-0">
-        <div class="eyebrow mb-1">${esc(d.ptype || d.catLabel)}</div>
-        <div class="flex items-center gap-3 flex-wrap">
-          <h2 class="text-3xl font-semibold leading-tight m-0 tracking-tight">${esc(d.name)}</h2>
-          ${d.appName ? `<span class="mono muted">${esc(d.appName)}</span>` : ''}
-          ${d.gh && d.gh.archived ? badge('Arşivlenmiş', 'badge-neutral') : ''}
-        </div>
-        <div class="flex items-center gap-2.5 flex-wrap mt-4">
-          <span class="pill solid" style="background:oklch(var(${m.v})/.16)"><span class="sw" style="background:oklch(var(${m.v}))"></span>Teknik güven · ${esc(m.l)}</span>
-          <span class="pill solid" style="background:oklch(var(${fl.v})/.16)"><span class="sw" style="border:2px solid oklch(var(${fl.v}))"></span>Özellik · ${esc(fl.l)}</span>
-          <span class="pill">${vtxt}</span>
-          <span class="pill" title="${esc(d.license)}">${esc(d.licFamily)}</span>
+        <div class="eyebrow">${esc(d.ptype || d.catLabel)}${d.gh && d.gh.archived ? ' · arşivlenmiş' : ''}</div>
+        <h1>${esc(d.name)}</h1>
+        <p class="lede">${esc(d.summary || d.note)}</p>
+        <div class="flex items-center gap-3 mt-6 flex-wrap">
+          ${d.url ? `<a class="btn btn-sm btn-primary" target="_blank" rel="noopener" href="${esc(d.url)}">${I.gh}${esc(d.repo)}</a>` : `<span class="pillx">Public repo bulunamadı</span>`}
+          <button class="btn btn-sm ${pinned ? 'btn-neutral' : 'btn-ghost border border-base-content/15'}" onclick="togglePin('${d.id}')">${pinned ? I.pinf + 'Sabit' : I.pin + 'Sabitle'}</button>
         </div>
       </div>
-      <div class="ml-auto flex items-center gap-3 shrink-0">
-        ${d.url ? `<a class="btn btn-sm btn-ghost border hairline rounded-xl" target="_blank" rel="noopener" href="${esc(d.url)}"><svg class="w-4 h-4" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></svg>${esc(d.repo)}</a>` : ''}
-        <button class="btn btn-sm rounded-xl ${pinned ? 'btn-primary' : 'btn-ghost border hairline'}" onclick="togglePin('${d.id}')">${pinned ? '<svg class="w-4 h-4" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M235.33,104l-53.47,53.65c4.56,12.67,6.45,33.89-13.19,60A15.93,15.93,0,0,1,157,224c-.38,0-.75,0-1.13,0a16,16,0,0,1-11.32-4.69L96.29,171,53.66,213.66a8,8,0,0,1-11.32-11.32L85,159.71l-48.3-48.3A16,16,0,0,1,38,87.63c25.42-20.51,49.75-16.48,60.4-13.14L152,20.7a16,16,0,0,1,22.63,0l60.69,60.68A16,16,0,0,1,235.33,104Z"/></svg>Sabit' : '<svg class="w-4 h-4" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z"/></svg>Sabitle'}</button>
-      </div>
-    </div>`;
-
-  // ---- intro ----
-  const feats = (d.features && d.features.length) ? d.features : (d.code && d.code.modules && d.code.modules.length ? d.code.modules.slice(0, 6).map(x => x.name + ' modülü') : []);
-  let body = `<section class="tint p-8">
-      <p class="intro-text">${esc(d.summary || d.note)}</p>
-      ${d.example ? `<div class="callout mt-6"><div class="eyebrow mb-1">Örnek senaryo</div><div class="leading-7">${esc(d.example)}</div></div>` : ''}
-      ${feats.length ? `<div class="mt-6"><div class="eyebrow mb-3">Öne çıkanlar</div><ul class="feat grid grid-cols-1 xl:grid-cols-2 gap-x-10 gap-y-2 m-0 p-0 list-none">${feats.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
-      ${f.audience ? `<div class="mt-6 muted">Kimin için: ${esc(f.audience)}</div>` : ''}
-    </section>`;
-
-  // ---- scores ----
-  const comp = (parts, gaps) => {
-    const g = Object.fromEntries((gaps || []).map(x => [x.k, x]));
-    return Object.entries(parts || {}).map(([k, v]) => {
-      const gap = g[k];
-      return `<div class="crow ${gap ? 'gap' : ''}"><span>${esc(k)}</span><span class="bar"><i style="width:${v[1] ? Math.round(v[0] / v[1] * 100) : 0}%"></i></span><span class="v"><b>${v[0]}</b> / ${v[1]}</span>${gap ? `<div class="hint">Eksik ${gap.max - gap.got}: ${esc(gap.hint)}${gap.note ? ` · ${esc(gap.note)}` : ''}</div>` : ''}</div>`;
-    }).join('');
-  };
-  const scoreCard = (title, lvl, score, desc, parts, gaps, foot = '') => `
-    <div class="surface p-7">
-      <div class="eyebrow">${title}</div>
-      <div class="flex items-end gap-4 mt-3">
-        <span class="score-n">${d.code ? score : '–'}</span>
-        <span class="pb-1.5 muted">/ 100</span>
-        <span class="pill solid ml-auto" style="background:oklch(var(${lvl.v})/.16)"><span class="sw" style="background:oklch(var(${lvl.v}))"></span>${esc(lvl.l)}</span>
-      </div>
-      <div class="bar mt-4"><i style="width:${d.code ? score : 0}%;background:oklch(var(${lvl.v}))"></i></div>
-      <p class="mt-4 mb-0 leading-7">${esc(desc)}</p>
-      ${foot}
-      ${d.code ? `<details class="fold mt-5"><summary><span class="car"><svg class="w-3.5 h-3.5" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></span>Nasıl hesaplandı, neler eksik</summary><div class="mt-3">${comp(parts, gaps)}</div></details>` : ''}
-    </div>`;
-  body += `<section><div class="grid grid-cols-1 2xl:grid-cols-2 gap-5">
-    ${scoreCard('Teknik güven', m, d.score, m.d, d.parts, d.gaps)}
-    ${scoreCard('Özellik zenginliği', fl, f.score, fl.d, f.parts, f.gaps, `<div class="muted mt-2">Beklenti ölçeği: ${esc(f.type)}</div>`)}
-  </div></section>`;
-
-  // ---- wbs ----
-  if (d.code) body += renderWBS(d);
-  else body += `<section class="surface p-7"><div class="eyebrow mb-3">Kod tabanı</div><p class="m-0 leading-7 max-w-2xl">Public GitHub reposu bulunamadı; kod tabanı incelenmedi. Puanlar ve WBS bu yüzden boş. Bilgiler rapor ve Marketplace düzeyindedir.</p></section>`;
-
-  // ---- sidebar ----
-  let side = '';
-  side += section('Kimlik', `<dl class="kvs">
-    <dt>Orijinal app adı</dt><dd class="mono">${esc(d.appName || '–')}</dd>
-    <dt>Orijinal repo</dt><dd>${d.url ? `<a class="link link-primary" target="_blank" rel="noopener" href="${esc(d.url)}">${esc(d.repo)}</a>` : '<span class="muted">bulunamadı</span>'}</dd>
-    <dt>Yayıncı</dt><dd>${esc(d.publisher || (d.repo ? d.repo.split('/')[0] : '–'))} · ${d.official ? 'resmi Frappe' : 'topluluk'}</dd>
-    <dt>Lisans</dt><dd>${esc(d.license)}</dd>
-    <dt>Kategori</dt><dd>${esc(d.catLabel)}</dd>
-    <dt>Rapor kaynağı</dt><dd>${esc(d.src.replace('r1', 'Rapor 1').replace('r2', 'Rapor 2').replace('known', 'Bilinen 25').replace(',', ', '))}${d.reportTier ? ` · seviye ${esc(d.reportTier)}` : ''}</dd>
-    ${d.requiredApps && d.requiredApps.length ? `<dt>Gerektirir</dt><dd class="mono">${esc(d.requiredApps.join(', '))}</dd>` : ''}
-  </dl>`);
-  let branches = '';
-  if (d.code && d.code.branches.length) {
-    const all = d.code.branches, main = all.filter(b => /^(version-|v\d|main$|master$|develop$)/.test(b)).sort(), other = all.length - main.length;
-    branches = `<details class="fold mt-3"><summary><span class="car"><svg class="w-3.5 h-3.5" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></span>Dallar</summary><div class="mt-2 leading-8">${main.slice(0, 16).map(b => `<span class="mono bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(b)}</span>`).join('')}${other ? `<span class="muted">+${other} diğer</span>` : ''}</div></details>`;
-  }
-  side += section('Frappe sürümü', `<dl class="kvs">
-    <dt>Frappe 15</dt><dd>${badge(VS[d.vs.v15], VSC[d.vs.v15])}</dd>
-    <dt>Frappe 16</dt><dd>${badge(VS[d.vs.v16], VSC[d.vs.v16])}</dd>
-    <dt>Dayanak</dt><dd class="muted">${esc(d.vs.note || '–')}</dd>
-  </dl>${branches}`);
-  if (d.gh) side += section('GitHub', `<div class="figs2">
-    ${fig(fmt(d.gh.stargazers_count), 'yıldız')}${fig(fmt(d.gh.forks_count), 'fork')}${fig(fmt(d.gh.open_issues_count), 'açık issue')}${fig(esc((d.gh.pushed_at || '').slice(0, 10)), 'son push')}
-  </div>`);
-  if (d.code) {
-    const c = d.code, mods = c.modules || [];
-    side += section('Kod tabanı', `<div class="figs2">
-      ${c.isFrappe ? fig(fmt(mods.length), 'modül') + fig(fmt(c.doctypes), 'DocType') : fig('<span class="text-base">Kütüphane</span>', 'tür')}
-      ${fig(fmt(c.tests), c.ci ? 'test dosyası · CI var' : 'test dosyası')}${fig(fmt(c.pyLoc), 'Python satırı')}${fig(fmt(c.js), 'JS/TS/Vue dosyası')}${fig(fmt(c.patches), 'migrasyon patch')}
+      <div class="rings">${ring(c ? d.score : null, m, 'Teknik güven')}${ring(c ? f.score : null, fl, 'Özellik zenginliği')}</div>
     </div>
-    ${c.stack && c.stack.length ? `<div class="muted mt-4">Arayüz: ${esc(c.stack.join(', '))}</div>` : ''}
-    ${c.hooks && c.hooks.length ? `<details class="fold mt-3"><summary><span class="car"><svg class="w-3.5 h-3.5" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></span>hooks.py mekanizmaları</summary><div class="mt-2 leading-8">${c.hooks.map(h => `<span class="mono bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(h)}</span>`).join('')}</div></details>` : ''}`);
-  }
-  $('#dbody').innerHTML = body;
-  $('#dside').innerHTML = side;
-  $('#dbody').scrollTop = 0; $('#dside').scrollTop = 0;
-}
+    <div class="strip">
+      <div><div class="k">Frappe 15 · 16</div><div class="v">${VS[d.vs.v15]} · ${VS[d.vs.v16]}</div></div>
+      <div><div class="k">Lisans</div><div class="v">${esc(d.license)}</div></div>
+      <div><div class="k">Yayıncı</div><div class="v">${esc(d.publisher || (d.repo ? d.repo.split('/')[0] : '–'))}${d.official ? ' · resmi' : ''}</div></div>
+      <div><div class="k">${c ? 'Yıldız · test · DocType' : 'Kaynak'}</div><div class="v">${c ? `${fmt(d.gh && d.gh.stargazers_count)} · ${fmt(c.tests)} · ${c.isFrappe ? fmt(c.doctypes) : '–'}` : esc(d.src.replace('r1','Rapor 1').replace('r2','Rapor 2').replace('known','Bilinen 25'))}</div></div>
+    </div>
+  </article>`;
 
-function wrow(n, g, label, sub, open) {
-  return `<div class="wrow"><span class="num">${n}</span><span>${g}</span><span>${label}</span><span class="sub">${sub}</span></div>`;
+  h += `<article class="panel mt-6"><div class="sec">
+    <h2>Ne yapar, kimin için</h2>
+    <div class="max-w-[64ch] leading-7">${f.audience ? `<span class="muted">Kimin için:</span> ${esc(f.audience)}` : ''}</div>
+    ${d.example ? `<div class="callout"><div class="eyebrow mb-1">Örnek senaryo</div><div class="leading-7">${esc(d.example)}</div></div>` : ''}
+    ${feats.length ? `<div class="eyebrow mt-7">Öne çıkanlar</div><ul class="feat">${feats.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+  </div></article>`;
+
+  if (c) {
+    h += `<article class="panel mt-6"><div class="sec">
+      <h2>Puanlar nasıl oluştu</h2>
+      <p class="muted m-0 max-w-[64ch] leading-7">${esc(m.d)} ${esc(fl.d)} Eşikler uygulamanın tipine göre kalibre edilir (${esc(f.type)}).</p>
+      <details class="fold mt-5"><summary><span class="car">${I.caret}</span><span class="font-medium">Teknik güven · ${d.score} / 100</span></summary><div class="mt-3">${comp(d.parts, d.gaps)}</div></details>
+      <details class="fold mt-3"><summary><span class="car">${I.caret}</span><span class="font-medium">Özellik zenginliği · ${f.score} / 100</span></summary><div class="mt-3">${comp(f.parts, f.gaps)}</div></details>
+    </div></article>`;
+    h += renderWBS(d);
+    h += `<article class="panel mt-6"><div class="sec"><h2>Kod tabanı ve sürüm</h2>
+      <div class="grid grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-5">
+        ${kv('Orijinal app adı', `<span class="mono">${esc(d.appName || '–')}</span>`)}${kv('Son commit', esc(c.lastCommit))}${kv('Python satırı', fmt(c.pyLoc))}${kv('JS / TS / Vue', fmt(c.js))}
+        ${kv('Migrasyon patch', fmt(c.patches))}${kv('Fork', fmt(d.gh && d.gh.forks_count))}${kv('Açık issue', fmt(d.gh && d.gh.open_issues_count))}${kv('Arayüz', esc((c.stack || []).join(', ') || 'klasik desk'))}
+      </div>
+      <p class="muted mt-5 mb-0 leading-7">Sürüm dayanağı: ${esc(d.vs.note || '–')}.${d.requiredApps && d.requiredApps.length ? ` Gerektirir: <span class="mono">${esc(d.requiredApps.join(', '))}</span>.` : ''}</p>
+      ${c.branches.length ? (() => { const main = c.branches.filter(b => /^(version-|v\d|main$|master$|develop$)/.test(b)).sort(); return `<details class="fold mt-3"><summary><span class="car">${I.caret}</span>Dallar ve hooks.py</summary><div class="mt-2 leading-8">${main.slice(0, 16).map(b => `<span class="mono bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(b)}</span>`).join('')}${c.branches.length > main.length ? `<span class="muted">+${c.branches.length - main.length} diğer</span>` : ''}<div class="mt-2">${(c.hooks || []).map(x => `<span class="mono bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(x)}</span>`).join('')}</div></div></details>`; })() : ''}
+    </div></article>`;
+  } else {
+    h += `<article class="panel mt-6"><div class="sec"><h2>Kod tabanı</h2><p class="m-0 leading-7 max-w-[64ch]">Public GitHub reposu bulunamadı; kod incelenmedi. Puanlar ve özellik kırılımı bu yüzden boş. Bilgiler rapor ve Marketplace düzeyindedir.</p></div></article>`;
+  }
+  $('#dbody').innerHTML = h; $('#detail').scrollTop = 0;
 }
-function wsum(n, g, label, sub) {
-  return `<summary class="wrow"><span class="num">${n}</span><span class="flex items-center gap-1.5"><span class="car"><svg class="w-3 h-3" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></span>${g}</span><span class="font-medium">${label}</span><span class="sub">${sub}</span></summary>`;
-}
+const kv = (k, v) => `<div><div class="muted">${k}</div><div class="font-medium mt-0.5">${v}</div></div>`;
+
+function wrow(n, g, label, sub) { return `<div class="wrow"><span class="num">${n}</span><span>${g}</span><span>${label}</span><span class="sub">${sub}</span></div>`; }
+function wsum(n, g, label, sub) { return `<summary class="wrow"><span class="num">${n}</span><span class="flex items-center gap-1.5"><span class="car">${I.caret}</span>${g}</span><span class="font-medium">${label}</span><span class="sub">${sub}</span></summary>`; }
 function renderWBS(d) {
-  const c = d.code;
-  let out = '';
+  const c = d.code; let out = '';
   if (c.isFrappe && c.modules && c.modules.length) {
     out += wrow('1', G.island, `<span class="font-medium">Ada · ${esc(d.appTitle || d.name)}</span>`, `${c.modules.length} modül · ${c.doctypes} DocType`);
     out += '<div class="wchild">';
-    c.modules.forEach((m, i) => {
-      const n = `1.${i + 1}`;
-      const open = i < 1 ? 'open' : '';
-      out += `<details class="wbs" ${open}>${wsum(n, G.mountain, `Dağ · ${esc(m.name)}`, `${m.rocks.length} kaya · ${m.boulders.length} büyük taş · ${m.pebbles.length + m.small.length} küçük taş · ${m.sand.print_format + m.sand.notification} kum`)}<div class="wchild">`;
+    c.modules.forEach((m, i) => { const n = `1.${i + 1}`;
+      out += `<details class="wbs" ${i < 1 ? 'open' : ''}>${wsum(n, G.mountain, `Dağ · ${esc(m.name)}`, `${m.rocks.length} kaya · ${m.boulders.length} büyük taş · ${m.pebbles.length + m.small.length} küçük taş · ${m.sand.print_format + m.sand.notification} kum`)}<div class="wchild">`;
       let k = 0;
       m.rocks.forEach(r => { k++; out += wrow(`${n}.${k}`, G.rock, `Kaya · ${esc(r.n)}`, `${r.s ? 'submittable · ' : ''}${r.f} alan · ${r.p} satır${r.t ? ' · test' : ''}`); });
       m.boulders.forEach(r => { k++; out += wrow(`${n}.${k}`, G.boulder, `${r.g ? 'Ayar' : 'Büyük taş'} · ${esc(r.n)}`, `${r.f} alan${r.p ? ' · ' + r.p + ' satır' : ''}${r.t ? ' · test' : ''}`); });
-      if (m.pebbles.length || m.small.length) {
-        k++;
-        const items = m.pebbles.map(p => `${esc(p.n)} <span class="muted">child</span>`).concat(m.small.map(s => `${esc(s.n)} <span class="muted">${s.k}</span>`));
-        out += `<details class="wbs">${wsum(`${n}.${k}`, G.pebble, 'Küçük taşlar', `${items.length} öğe`)}<div class="wchild py-2 text-sm leading-7 columns-2 xl:columns-3 gap-8">${items.map(x => `<div class="break-inside-avoid">${x}</div>`).join('')}</div></details>`;
-      }
+      if (m.pebbles.length || m.small.length) { k++; const items = m.pebbles.map(p => `${esc(p.n)} <span class="muted">child</span>`).concat(m.small.map(s => `${esc(s.n)} <span class="muted">${s.k}</span>`));
+        out += `<details class="wbs">${wsum(`${n}.${k}`, G.pebble, 'Küçük taşlar', `${items.length} öğe`)}<div class="wchild py-2 leading-7 columns-2 xl:columns-3 gap-8">${items.map(x => `<div class="break-inside-avoid">${x}</div>`).join('')}</div></details>`; }
       if (m.sand.print_format || m.sand.notification) { k++; out += wrow(`${n}.${k}`, G.sand, 'Kum', `${m.sand.print_format} print format · ${m.sand.notification} bildirim`); }
-      if (!(m.rocks.length + m.boulders.length + m.pebbles.length + m.small.length)) out += `<div class="text-sm muted px-3 py-1">modül klasörü boş veya yalnızca kod</div>`;
-      out += `</div></details>`;
-    });
-    out += wrow(`1.${c.modules.length + 1}`, G.sand, 'Kum · uygulama düzeyi', `${c.patches} patch · ${c.translations} çeviri · ${c.fixtures ? 'fixtures var' : 'fixture yok'} · ${c.publicJs} public js · ${c.templates} template · ${c.api} api dosyası · ${(c.hooks || []).length} hook türü`);
+      if (!(m.rocks.length + m.boulders.length + m.pebbles.length + m.small.length)) out += `<div class="muted px-3 py-1">modül klasörü boş veya yalnızca kod</div>`;
+      out += `</div></details>`; });
+    out += wrow(`1.${c.modules.length + 1}`, G.sand, 'Kum · uygulama düzeyi', `${c.patches} patch · ${c.translations} çeviri · ${c.fixtures ? 'fixtures var' : 'fixture yok'} · ${c.publicJs} public js · ${c.api} api dosyası`);
     out += '</div>';
   } else if (c.tree && c.tree.length) {
-    out += wrow('1', G.island, `<span class="font-medium">Ada · ${esc(d.name)}</span>`, 'Frappe app değil; klasör yapısı');
-    out += '<div class="wchild">';
-    c.tree.forEach((t, i) => {
-      const n = `1.${i + 1}`;
-      const g = t.files >= 200 ? G.mountain : t.files >= 40 ? G.rock : t.files >= 8 ? G.boulder : G.pebble;
-      out += `<details class="wbs" ${i < 3 ? 'open' : ''}>${wsum(n, g, `${esc(t.name)}/`, `${t.files} dosya`)}<div class="wchild">`;
+    out += wrow('1', G.island, `<span class="font-medium">Ada · ${esc(d.name)}</span>`, 'Frappe app değil; klasör yapısı'); out += '<div class="wchild">';
+    c.tree.forEach((t, i) => { const n = `1.${i + 1}`; const g = t.files >= 200 ? G.mountain : t.files >= 40 ? G.rock : t.files >= 8 ? G.boulder : G.pebble;
+      out += `<details class="wbs" ${i < 2 ? 'open' : ''}>${wsum(n, g, `${esc(t.name)}/`, `${t.files} dosya`)}<div class="wchild">`;
       (t.children || []).forEach((ch, j) => out += wrow(`${n}.${j + 1}`, ch.files >= 40 ? G.boulder : ch.files >= 5 ? G.pebble : G.sand, `${esc(ch.name)}/`, `${ch.files} dosya`));
-      out += `</div></details>`;
-    });
+      out += `</div></details>`; });
     out += '</div>';
-  } else {
-    out += `<div class="text-sm muted">Modül veya DocType bulunamadı; yalnızca script, tema ya da boş modül.</div>`;
-  }
-  return `<section class="surface p-7"><div class="flex items-baseline gap-4 mb-4 flex-wrap"><h3 class="eyebrow m-0">Özellik kırılımı (WBS)</h3><span class="muted">ada · dağ · kaya · büyük taş · küçük taş · kum</span></div>${out}</section>`;
+  } else out += `<div class="muted">Modül veya DocType bulunamadı; yalnızca script, tema ya da boş modül.</div>`;
+  return `<article class="panel mt-6"><div class="sec"><h2>Özellik kırılımı (WBS)</h2><p class="muted mt-0 mb-4">Ada uygulama, dağ modül, kaya onaylı belge, büyük taş DocType, küçük taş child table ve rapor, kum ise print format, bildirim ve patch.</p>${out}</div></article>`;
 }
 
 function showHome() {
   const counts = {}; DATA.forEach(d => counts[d.maturity] = (counts[d.maturity] || 0) + 1);
   const fcounts = {}; DATA.forEach(d => fcounts[d.feat.level] = (fcounts[d.feat.level] || 0) + 1);
-  $('#dhead').innerHTML = `<div class="eyebrow mb-1">Frappe ekosistemi</div><h2 class="text-3xl font-semibold leading-tight m-0 tracking-tight">${DATA.length} uygulama, tek bakışta</h2><div class="muted mt-3 max-w-3xl">Soldan bir uygulamanın üzerine gelin, ayrıntısı burada açılsın; tıklayınca sabitlenir. Her uygulama için iki puan var: kodun teknik güveni ve hedef kitlesine göre özellik zenginliği.</div>`;
-  $('#dbody').innerHTML =
-    `<section><div class="eyebrow mb-4">Nereden başlayalım</div><div class="grid grid-cols-2 xl:grid-cols-3 gap-4">${JOURNEYS.map((j, i) => `<button class="jcard" data-j="${i}"><div class="font-medium text-lg">${esc(j.t)}</div><div class="muted mt-1">${esc(j.d)}</div></button>`).join('')}</div></section>` +
-    `<section><div class="grid grid-cols-1 2xl:grid-cols-2 gap-5">
-      <div class="surface p-7"><div class="eyebrow mb-4">Teknik güven</div><div class="grid gap-2">${Object.entries(MAT).map(([k, m]) => `<button class="lvl" data-mat="${k}"><div class="flex items-center gap-3"><span class="sw" style="background:oklch(var(${m.v}))"></span><span class="font-medium">${m.l}</span><span class="ml-auto mono muted">${counts[k] || 0}</span></div><div class="muted mt-1">${m.d}</div></button>`).join('')}</div></div>
-      <div class="surface p-7"><div class="eyebrow mb-4">Özellik zenginliği</div><div class="grid gap-2">${Object.entries(FL).filter(([k]) => k !== 'unknown').map(([k, f]) => `<button class="lvl" data-feat="${k}"><div class="flex items-center gap-3"><span class="sw" style="border:2px solid oklch(var(${f.v}))"></span><span class="font-medium">${f.l}</span><span class="ml-auto mono muted">${fcounts[k] || 0}</span></div><div class="muted mt-1">${f.d}</div></button>`).join('')}</div><p class="muted mt-4 mb-0">Eşikler uygulamanın tipine göre kalibre edilir: bağımsız ürün, eklenti, araç.</p></div>
-    </div></section>`;
-  $('#dside').innerHTML =
-    section('Yöntem', `<p class="leading-7 m-0">${DATA.length} uygulama iki araştırma raporundan alındı. ${172} tanesinin GitHub reposu doğrulandı; ${172} repo klonlanıp hooks.py, modules.txt, DocType tanımları, testler, patch’ler ve dallar okundu (${2026-09-15}). Sürüm desteği <span class="mono">version-15</span> ve <span class="mono">version-16</span> dallarından; dal yoksa aktif tek dal “olası” sayıldı.</p>`) +
-    section('Özellik kırılımı metaforu', `<dl class="kvs">
-      <dt><span class="inline-flex items-center gap-2">${G.island} Ada</span></dt><dd>Uygulamanın kendisi</dd>
-      <dt><span class="inline-flex items-center gap-2">${G.mountain} Dağ</span></dt><dd>Modül</dd>
-      <dt><span class="inline-flex items-center gap-2">${G.rock} Kaya</span></dt><dd>Onaylı (submittable) veya büyük DocType</dd>
-      <dt><span class="inline-flex items-center gap-2">${G.boulder} Büyük taş</span></dt><dd>Standart DocType, ayar ekranı</dd>
-      <dt><span class="inline-flex items-center gap-2">${G.pebble} Küçük taş</span></dt><dd>Child table, rapor, sayfa, dashboard</dd>
-      <dt><span class="inline-flex items-center gap-2">${G.sand} Kum</span></dt><dd>Print format, bildirim, patch, fixture, hook</dd>
-    </dl>`);
+  $('#dbody').innerHTML = `<article class="panel"><div class="top" style="grid-template-columns:1fr">
+      <div><div class="eyebrow">Frappe ekosistemi</div><h1>${DATA.length} uygulama, iki puan, tek bakış</h1>
+      <p class="lede">Soldan bir uygulamanın üzerine gelin, ayrıntısı burada açılsın; tıklayınca sabitlenir. Her uygulama için kodun teknik güveni ve hedef kitlesine göre özellik zenginliği ölçüldü. ${172} repo klonlanıp incelendi.</p></div>
+    </div></article>
+    <div class="mt-8"><div class="eyebrow mb-4">Nereden başlayalım</div><div class="grid grid-cols-2 xl:grid-cols-3 gap-4">${JOURNEYS.map((j, i) => `<button class="jcard" data-j="${i}"><div class="font-semibold text-lg">${esc(j.t)}</div><div class="muted mt-1">${esc(j.d)}</div></button>`).join('')}</div></div>
+    <article class="panel mt-8"><div class="sec"><h2>Puanlar ne anlatır</h2>
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-6">
+        <div><div class="eyebrow mb-3">Teknik güven</div>${Object.entries(MAT).map(([k, m]) => `<button class="flex items-start gap-3 w-full text-left py-2" data-mat="${k}"><span class="sw mt-2" style="background:oklch(var(${m.v}))"></span><span><span class="font-medium">${m.l}</span> <span class="mono muted">${counts[k] || 0}</span><div class="muted">${m.d}</div></span></button>`).join('')}</div>
+        <div><div class="eyebrow mb-3">Özellik zenginliği</div>${Object.entries(FL).filter(([k]) => k !== 'unknown').map(([k, f]) => `<button class="flex items-start gap-3 w-full text-left py-2" data-feat="${k}"><span class="sw mt-2" style="border:2px solid oklch(var(${f.v}))"></span><span><span class="font-medium">${f.l}</span> <span class="mono muted">${fcounts[k] || 0}</span><div class="muted">${f.d}</div></span></button>`).join('')}<p class="muted mt-3 mb-0">Eşikler uygulamanın tipine göre kalibre edilir: bağımsız ürün, eklenti, araç.</p></div>
+      </div>
+      <p class="muted mt-6 mb-0 leading-7 max-w-[70ch]">Yöntem: ${DATA.length} uygulama iki araştırma raporundan alındı; ${172} tanesinin GitHub reposu doğrulandı, ${172} repo klonlanıp hooks.py, modules.txt, DocType tanımları, testler, patch’ler ve dallar okundu (${2026-09-15}). Sürüm desteği version-15 ve version-16 dallarından; dal yoksa aktif tek dal “olası” sayıldı.</p>
+    </div></article>`;
+  $('#detail').scrollTop = 0;
   $('#dbody').querySelectorAll('[data-j]').forEach(b => b.onclick = () => applyJourney(JOURNEYS[+b.dataset.j].f));
   $('#dbody').querySelectorAll('[data-mat]').forEach(b => b.onclick = () => applyJourney({mat: b.dataset.mat}));
   $('#dbody').querySelectorAll('[data-feat]').forEach(b => b.onclick = () => applyJourney({feat: b.dataset.feat}));
 }
-function applyJourney(f) {
-  state.q = f.q || ''; state.cat = f.cat || ''; state.mat = f.mat || ''; state.ver = f.ver || ''; state.lic = f.lic || ''; state.own = f.own || ''; state.feat = f.feat || '';
-  syncControls(); renderList();
-  const first = state.visible[0]; if (first) { state.hover = first; show(first, false); markActive(); }
-}
+function applyJourney(f) { state.q = f.q || ''; state.cat = f.cat || ''; state.mat = f.mat || ''; state.ver = f.ver || ''; state.lic = f.lic || ''; state.own = f.own || ''; state.feat = f.feat || '';
+  syncControls(); renderList(); const first = state.visible[0]; if (first) { state.hover = first; show(first, false); markActive(); } }
 function syncControls() { $('#q').value = state.q; $('#fCat').value = state.cat; $('#fMat').value = state.mat; $('#fVer').value = state.ver; $('#fLic').value = state.lic; $('#fOwn').value = state.own; $('#fFeat').value = state.feat; }
-
-// category select
 (() => { const counts = {}; DATA.forEach(d => counts[d.cat] = (counts[d.cat] || 0) + 1);
   $('#fCat').innerHTML = `<option value="">Tüm kategoriler (${DATA.length})</option>` + CAT_ORDER.map(c => `<option value="${c}">${esc(labelCat(c))} (${counts[c] || 0})</option>`).join(''); })();
-
 $('#q').addEventListener('input', e => { state.q = e.target.value; renderList(); });
 [['fCat','cat'],['fMat','mat'],['fVer','ver'],['fLic','lic'],['fOwn','own'],['fFeat','feat']].forEach(([id, k]) => $('#' + id).addEventListener('change', e => { state[k] = e.target.value; renderList(); }));
 $('#reset').onclick = () => applyJourney({});
 $('#home').onclick = () => { state.pinned = null; state.hover = null; markActive(); showHome(); };
-
 document.addEventListener('keydown', e => {
   if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); $('#q').select(); return; }
   if (e.key === 'Escape') { if (document.activeElement === $('#q')) $('#q').blur(); state.pinned = null; markActive(); if (state.hover) show(state.hover, false); return; }
-  if (['ArrowDown','ArrowUp'].includes(e.key)) {
-    e.preventDefault();
-    let i = state.visible.indexOf(state.pinned || state.hover);
-    i = e.key === 'ArrowDown' ? Math.min(state.visible.length - 1, i + 1) : Math.max(0, i - 1);
-    const id = state.visible[i]; if (!id) return;
-    state.hover = id; if (state.pinned) state.pinned = id; show(id, !!state.pinned); markActive();
-    const a = $('#list a[data-id="' + id + '"]'); a && a.scrollIntoView({block:'nearest'});
-  }
+  if (['ArrowDown','ArrowUp'].includes(e.key)) { e.preventDefault(); let i = state.visible.indexOf(state.pinned || state.hover);
+    i = e.key === 'ArrowDown' ? Math.min(state.visible.length - 1, i + 1) : Math.max(0, i - 1); const id = state.visible[i]; if (!id) return;
+    state.hover = id; if (state.pinned) state.pinned = id; show(id, !!state.pinned); markActive(); const a = $('#list a[data-id="' + id + '"]'); a && a.scrollIntoView({block:'nearest'}); }
   if (e.key === 'Enter' && document.activeElement !== $('#q')) { const cur = state.pinned || state.hover; if (cur) togglePin(cur); }
 });
-
-(() => {
-  const split = $('#split'), left = $('#left'); let dragging = false;
+(() => { const split = $('#split'), left = $('#rail'); let dragging = false;
   split.addEventListener('pointerdown', e => { dragging = true; split.setPointerCapture(e.pointerId); document.body.style.userSelect = 'none'; });
-  split.addEventListener('pointermove', e => { if (!dragging) return; left.style.width = Math.max(280, Math.min(window.innerWidth * 0.6, e.clientX)) + 'px'; });
+  split.addEventListener('pointermove', e => { if (!dragging) return; left.style.width = Math.max(280, Math.min(window.innerWidth * 0.5, e.clientX)) + 'px'; });
   split.addEventListener('pointerup', () => { dragging = false; document.body.style.userSelect = ''; try { localStorage.setItem('atlas.left', left.style.width); } catch (_) {} });
-  try { const w = localStorage.getItem('atlas.left'); if (w) left.style.width = w; } catch (_) {}
-  window.addEventListener('resize', () => { const w = parseInt(left.style.width || 400); if (w > window.innerWidth * 0.6) left.style.width = Math.max(280, window.innerWidth * 0.6) + 'px'; });
-})();
-
-(() => {
-  const root = document.documentElement, t = $('#themeToggle');
-  let dark = false; try { const s = localStorage.getItem('atlas.dark'); dark = s == null ? matchMedia('(prefers-color-scheme: dark)').matches : s === '1'; } catch (_) {}
-  const apply = () => root.setAttribute('data-theme', dark ? 'business' : 'corporate');
-  apply(); t.checked = dark;
-  t.addEventListener('change', () => { dark = t.checked; apply(); try { localStorage.setItem('atlas.dark', dark ? '1' : '0'); } catch (_) {} });
-})();
-
+  try { const w = localStorage.getItem('atlas.left'); if (w) left.style.width = w; } catch (_) {} })();
+(() => { const root = document.documentElement, t = $('#themeToggle'); let dark = false;
+  try { const s = localStorage.getItem('atlas.dark'); dark = s == null ? matchMedia('(prefers-color-scheme: dark)').matches : s === '1'; } catch (_) {}
+  const apply = () => root.setAttribute('data-theme', dark ? 'business' : 'corporate'); apply(); t.checked = dark;
+  t.addEventListener('change', () => { dark = t.checked; apply(); try { localStorage.setItem('atlas.dark', dark ? '1' : '0'); } catch (_) {} }); })();
 renderList(); showHome();
 </script>
 </body>
