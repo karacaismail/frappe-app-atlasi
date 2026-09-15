@@ -6530,7 +6530,14 @@ details.collapse summary {
   .vsq i.na { border-style: dotted; }
 
   /* detail */
-  #dbody { padding: 36px 48px 64px; }
+  #dbody { padding: 36px 40px 64px; }
+  #dside { padding: 32px 28px 64px; }
+  #dside > section { margin-bottom: 40px; }
+  #dside h3 { margin: 0 0 14px; }
+  .kvs dt { color: oklch(var(--bc)/.55); margin-top: 12px; }
+  .kvs dt:first-child { margin-top: 0; }
+  .kvs dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+  .figs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
   #dbody > section { max-width: 1080px; margin-bottom: 44px; }
   #dbody h3 { margin: 0 0 16px; }
   .kv { display: grid; grid-template-columns: 200px 1fr; gap: 12px 28px; align-items: baseline; }
@@ -6595,7 +6602,7 @@ details.collapse summary {
 </header>
 
 <div class="flex flex-1 min-h-0">
-  <aside id="left" class="flex flex-col bg-base-100 border-r hairline shrink-0" style="width:400px;min-width:280px;max-width:60vw">
+  <aside id="left" class="flex flex-col bg-base-100 border-r hairline shrink-0" style="width:360px;min-width:280px;max-width:60vw">
     <div class="px-6 pt-5 pb-4 border-b hairline shrink-0">
       <div class="flex items-baseline justify-between mb-3">
         <span class="eyebrow">Filtreler</span>
@@ -6656,7 +6663,10 @@ details.collapse summary {
   <div id="split" class="w-[5px] cursor-col-resize bg-transparent hover:bg-primary/40 transition-colors shrink-0"></div>
   <main class="flex-1 min-w-0 flex flex-col bg-base-100">
     <div id="dhead" class="border-b hairline px-12 py-6 shrink-0"></div>
-    <div id="dbody" class="flex-1 overflow-y-auto scrollbar-thin"></div>
+    <div class="flex flex-1 min-h-0">
+      <div id="dbody" class="flex-1 min-w-0 overflow-y-auto scrollbar-thin"></div>
+      <aside id="dside" class="shrink-0 border-l hairline overflow-y-auto scrollbar-thin bg-base-100" style="width:380px"></aside>
+    </div>
   </main>
 </div>
 </div>
@@ -6818,8 +6828,8 @@ function show(id, pinned) {
       </div>
     </div>`;
 
-  let body = '';
-  body += section('Kimlik', `<dl class="kv">
+  let body = '', side = '';
+  side += section('Kimlik', `<dl class="kvs">
     <dt>Orijinal app adı</dt><dd class="mono">${esc(d.appName || '–')}${d.appTitle ? ` <span class="muted font-sans">· ${esc(d.appTitle)}</span>` : ''}</dd>
     <dt>Orijinal repo</dt><dd>${d.url ? `<a class="link link-primary" target="_blank" rel="noopener" href="${esc(d.url)}">${esc(d.repo)}</a>` : '<span class="muted">bulunamadı</span>'}</dd>
     <dt>Yayıncı</dt><dd>${esc(d.publisher || (d.repo ? d.repo.split('/')[0] : '–'))}</dd>
@@ -6833,7 +6843,7 @@ function show(id, pinned) {
     const all = d.code.branches, main = all.filter(b => /^(version-|v\d|main$|master$|develop$|staging$|release)/.test(b)).sort(), other = all.length - main.length;
     branches = `<dt>Dallar</dt><dd class="leading-7">${main.slice(0, 16).map(b => `<span class="mono text-xs bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(b)}</span>`).join('')}${main.length > 16 ? '…' : ''}${other ? `<span class="muted text-xs">+${other} diğer dal</span>` : ''}</dd>`;
   }
-  body += section('Frappe sürüm desteği', `<dl class="kv">
+  side += section('Frappe sürüm desteği', `<dl class="kvs">
     <dt>Frappe 15</dt><dd>${badge(VS[d.vs.v15], VSC[d.vs.v15])}</dd>
     <dt>Frappe 16</dt><dd>${badge(VS[d.vs.v16], VSC[d.vs.v16])}</dd>
     <dt>Dayanak</dt><dd class="muted">${esc(d.vs.note || '–')}</dd>
@@ -6859,7 +6869,7 @@ function show(id, pinned) {
       </div>
       ${extra}
       ${parts && Object.keys(parts).length ? `<div class="flex flex-wrap gap-x-6 gap-y-1 mt-4">${Object.entries(parts).map(([k, v]) => `<span><span class="muted">${esc(k)}</span> <span class="mono">${v[0]}<span class="muted">/${v[1]}</span></span></span>`).join('')}</div>` : ''}
-      <ul class="mt-4 grid grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-1.5 muted list-disc pl-5">${(reasons || []).map(r => `<li>${esc(r)}</li>`).join('')}</ul>
+      <ul class="mt-4 grid grid-cols-2 gap-x-8 gap-y-1.5 muted list-disc pl-5">${(reasons || []).map(r => `<li>${esc(r)}</li>`).join('')}</ul>
       ${d.code ? gapTable(gaps, parts) : ''}
     </div>`;
   body += section('Değerlendirme', `<div class="grid gap-4">
@@ -6867,7 +6877,7 @@ function show(id, pinned) {
     ${scoreRow('Özellik zenginliği', fpill(fl), f.score, fl.d, f.reasons, f.parts, f.gaps, `<dl class="kv mt-4"><dt>Hedef kitle</dt><dd>${esc(f.audience || '–')}</dd><dt>Beklenti ölçeği</dt><dd>${esc(f.type)} <span class="muted">· eşikler uygulama tipine göre kalibre edilir</span></dd></dl>`)}
   </div>`, `<span class="muted">iki ayrı puan: teknik güven ve hedef kitleye göre özellik seviyesi</span>`);
 
-  if (d.gh) body += section('GitHub', `<div class="figs">
+  if (d.gh) side += section('GitHub', `<div class="figs2">
     ${fig(fmt(d.gh.stargazers_count), 'yıldız')}${fig(fmt(d.gh.forks_count), 'fork')}${fig(fmt(d.gh.open_issues_count), 'açık issue ve PR')}
     ${fig(esc((d.gh.created_at || '').slice(0, 10)), 'oluşturulma')}${fig(esc((d.gh.pushed_at || '').slice(0, 10)), 'son push')}${fig(`<span class="text-base">${esc(d.gh.default_branch || '–')}</span>`, 'varsayılan dal')}
   </div>`);
@@ -6877,18 +6887,20 @@ function show(id, pinned) {
     const rocks = mods.reduce((a, m) => a + m.rocks.length, 0), boulders = mods.reduce((a, m) => a + m.boulders.length, 0), pebbles = mods.reduce((a, m) => a + m.pebbles.length, 0);
     const smalls = mods.reduce((a, m) => a + m.small.length, 0);
     const sand = mods.reduce((a, m) => a + m.sand.print_format + m.sand.notification, 0) + (c.patches || 0) + (c.fixtures ? 1 : 0);
-    body += section('Kod tabanı', `<div class="figs">
+    side += section('Kod tabanı', `<div class="figs2">
       ${c.isFrappe ? fig(fmt(mods.length), 'modül') + fig(fmt(c.doctypes), 'DocType', `${rocks} kaya · ${boulders} büyük taş · ${pebbles} küçük taş`) + fig(fmt(smalls), 'rapor, sayfa, dashboard') + fig(fmt(sand), 'kum', 'print format, bildirim, patch') : fig('<span class="text-base">Kütüphane / araç</span>', 'tür', 'Frappe app değil')}
       ${fig(fmt(c.tests), 'test dosyası', c.ci ? 'CI var' : 'CI yok')}${fig(fmt(c.pyLoc), 'Python satırı', `${fmt(c.py)} dosya`)}${fig(fmt(c.js), 'JS / TS / Vue dosyası', esc((c.stack || []).join(', ') || 'klasik desk'))}${fig(`${fmt(c.patches)} / ${fmt(c.translations)}`, 'patch / çeviri', c.docs ? 'docs klasörü var' : `README ${fmt(c.readme)} karakter`)}
     </div>
-    ${c.hooks && c.hooks.length ? `<dl class="kv mt-6"><dt>hooks.py</dt><dd class="leading-7">${c.hooks.map(h => `<span class="mono text-xs bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(h)}</span>`).join('')}</dd></dl>` : ''}`,
+    ${c.hooks && c.hooks.length ? `<dl class="kvs mt-5"><dt>hooks.py</dt><dd class="leading-8">${c.hooks.map(h => `<span class="mono text-xs bg-base-200 rounded px-1.5 py-0.5 mr-1.5">${esc(h)}</span>`).join('')}</dd></dl>` : ''}`,
     `<span class="text-xs muted">klonlanıp incelendi · son commit ${esc(c.lastCommit)}</span>`);
     body += renderWBS(d);
   } else {
-    body += section('Kod tabanı', `<div class="rounded-xl border hairline p-6 text-sm leading-6 max-w-2xl">Public GitHub reposu bulunamadı; kod tabanı incelenmedi. Elimizdeki bilgi rapor ve Marketplace düzeyindedir: <span class="font-medium">${esc(d.note)}</span>. Olgunluk etiketi bu yüzden “Bilinmiyor”.</div>`);
+    body += section('WBS · özellik kırılımı', `<p class="muted max-w-2xl leading-7">Kod tabanı incelenmediği için özellik kırılımı çıkarılamadı.</p>`);
+    side += section('Kod tabanı', `<div class="rounded-xl border hairline p-5 leading-7">Public GitHub reposu bulunamadı; kod tabanı incelenmedi. Elimizdeki bilgi rapor ve Marketplace düzeyindedir: <span class="font-medium">${esc(d.note)}</span>. Olgunluk etiketi bu yüzden “Bilinmiyor”.</div>`);
   }
   $('#dbody').innerHTML = body;
-  $('#dbody').scrollTop = 0;
+  $('#dside').innerHTML = side;
+  $('#dbody').scrollTop = 0; $('#dside').scrollTop = 0;
 }
 
 function wrow(n, g, label, sub, open) {
@@ -6948,7 +6960,9 @@ function showHome() {
       <p class="text-sm muted mt-5 max-w-3xl leading-6">Puan bileşenleri: repo yaşı, son commit, test dosyaları, CI, migrasyon patch’leri, çeviri, dokümantasyon, v15/v16 dalları, yıldız ve fork, hook çeşitliliği, DocType ölçeği. README metinleri puana girmez.</p>`, `<span class="text-xs muted">kod tabanından hesaplandı</span>`) +
     section('Özellik zenginliği ölçeği', `<div class="grid grid-cols-2 xl:grid-cols-5 gap-3">${Object.entries(FL).filter(([k]) => k !== 'unknown').map(([k, f]) => `<button class="lvl" data-feat="${k}"><div class="flex items-center gap-3"><span class="sw w-2.5 h-2.5 rounded-full" style="border:2px solid oklch(var(${f.v}))"></span><span class="font-medium">${f.l}</span><span class="ml-auto mono muted">${fcounts[k] || 0}</span></div><div class="muted mt-2">${f.d}</div></button>`).join('')}</div>
       <p class="muted mt-5 max-w-3xl leading-7">Teknik güven puanından bağımsızdır. Bileşenler: veri modeli genişliği, işlem derinliği (submittable belgeler), raporlama, kullanıcı deneyimi, otomasyon ve entegrasyon, yönetim ve yapılandırma. Eşikler uygulamanın hedef kitlesine ve tipine (bağımsız ürün, eklenti, araç) göre kalibre edilir; küçük bir eklenti kendi kapsamında “Zengin” olabilir.</p>`, `<span class="muted">hedef kitleye göre kalibre</span>`) +
-    section('WBS · doğa metaforu', `<div class="overflow-x-auto max-w-3xl"><table class="table"><thead><tr><th>Seviye</th><th>Metafor</th><th>Karşılığı</th></tr></thead><tbody>
+    '';
+  $('#dside').innerHTML =
+    section('WBS · doğa metaforu', `<div class="overflow-x-auto "><table class="table table-sm"><thead><tr><th>Seviye</th><th>Metafor</th><th>Karşılığı</th></tr></thead><tbody>
         <tr><td class="mono">1</td><td><span class="flex items-center gap-3">${G.island} Ada</span></td><td>Uygulamanın kendisi</td></tr>
         <tr><td class="mono">1.n</td><td><span class="flex items-center gap-3">${G.mountain} Dağ</span></td><td>Modül (modules.txt)</td></tr>
         <tr><td class="mono">1.n.k</td><td><span class="flex items-center gap-3">${G.rock} Kaya</span></td><td>Submittable veya büyük DocType (40+ alan ve 150+ satır)</td></tr>
@@ -6956,7 +6970,7 @@ function showHome() {
         <tr><td class="mono">1.n.k</td><td><span class="flex items-center gap-3">${G.pebble} Küçük taş</span></td><td>Child table, rapor, sayfa, dashboard, workspace</td></tr>
         <tr><td class="mono">1.n.k</td><td><span class="flex items-center gap-3">${G.sand} Kum</span></td><td>Print format, bildirim, patch, fixture, çeviri, hook</td></tr>
       </tbody></table></div>`) +
-    section('Yöntem', `<p class="text-sm leading-7 max-w-3xl">${DATA.length} uygulama iki araştırma raporundan alındı. ${172} tanesi için GitHub reposu doğrulandı; ${172} repo shallow-clone edilip hooks.py, modules.txt, DocType JSON’ları, testler, patch’ler, dallar ve package.json okundu (${2026-09-15}). Sürüm desteği <span class="mono">version-15</span> ve <span class="mono">version-16</span> dallarından alındı; dal yoksa aktif tek dal ve README ipuçları “olası” olarak işaretlendi. Repo bulunamayanlar “Bilinmiyor”.</p>`);
+    section('Yöntem', `<p class="text-sm leading-7 ">${DATA.length} uygulama iki araştırma raporundan alındı. ${172} tanesi için GitHub reposu doğrulandı; ${172} repo shallow-clone edilip hooks.py, modules.txt, DocType JSON’ları, testler, patch’ler, dallar ve package.json okundu (${2026-09-15}). Sürüm desteği <span class="mono">version-15</span> ve <span class="mono">version-16</span> dallarından alındı; dal yoksa aktif tek dal ve README ipuçları “olası” olarak işaretlendi. Repo bulunamayanlar “Bilinmiyor”.</p>`);
   $('#dbody').querySelectorAll('[data-j]').forEach(b => b.onclick = () => applyJourney(JOURNEYS[+b.dataset.j].f));
   $('#dbody').querySelectorAll('[data-mat]').forEach(b => b.onclick = () => applyJourney({mat: b.dataset.mat}));
   $('#dbody').querySelectorAll('[data-feat]').forEach(b => b.onclick = () => applyJourney({feat: b.dataset.feat}));
