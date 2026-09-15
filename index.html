@@ -6549,7 +6549,21 @@ details.collapse summary {
   #list a.item .lv { width: 10px; height: 10px; border-radius: 999px; flex: none; }
   #list a.item .lvt { color: var(--rail-muted); font-family: Roboto, sans-serif; }
   #list a.item.pinned .lvt { color: var(--rail-sel-fg); }
-  .railfoot { border-top: 1px solid var(--rail-line); color: var(--rail-muted); }
+  .railfoot { border-top: 1px solid var(--rail-line); color: var(--rail-muted); background: var(--rail-bg); position: sticky; bottom: 0; }
+  .row { display: flex; align-items: stretch; gap: 2px; }
+  .row > label.ck { display: flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; cursor: pointer; border-radius: 12px; flex: none; }
+  .row > label.ck:hover { background: var(--rail-hover); }
+  .row input[type="checkbox"] { width: 22px; height: 22px; margin: 0; accent-color: #FFD166; cursor: pointer; }
+  .row > a.item { flex: 1; min-width: 0; }
+  #list a.item.sel .name { font-weight: 600; }
+  .xbtn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 12px; font-weight: 600; background: #FFD166; color: #14181F; border: 0; cursor: pointer; }
+  .xbtn:hover { background: #FFC94A; }
+  .xbtn[disabled] { opacity: .45; cursor: not-allowed; }
+  .xlink { min-height: 44px; display: inline-flex; align-items: center; color: var(--rail-muted); background: none; border: 0; cursor: pointer; padding: 0 6px; }
+  .xlink:hover { color: var(--rail-fg); }
+  dialog.xdlg { border: 1px solid var(--line); border-radius: 24px; padding: 0; width: min(760px, 92vw); background: var(--card); color: var(--ink); box-shadow: 0 30px 80px -30px rgba(0,0,0,.5); }
+  dialog.xdlg::backdrop { background: rgba(10,12,20,.55); }
+  dialog.xdlg textarea { width: 100%; min-height: 320px; resize: vertical; border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; font-family: "Roboto Mono", monospace; font-size: 1rem; line-height: 1.5; background: var(--page); color: var(--ink); }
   #split { width: 12px; margin: 0 -4px; cursor: col-resize; background: transparent; }
   #split:hover, #split:focus-visible { background: var(--accent-soft); }
 
@@ -6638,8 +6652,28 @@ details.collapse summary {
       </details>
     </div>
     <div id="list" class="flex-1 overflow-y-auto scrollbar-thin" role="listbox" aria-label="Uygulamalar"></div>
-    <div class="railfoot px-5 py-3"><span id="shown"></span></div>
+    <div class="railfoot px-5 py-3 grid gap-2">
+      <div class="flex items-center justify-between"><span id="shown"></span><span id="selCount" aria-live="polite"></span></div>
+      <button id="exportBtn" class="xbtn w-full" type="button">Onaylananları dışa aktar (.md)</button>
+      <div class="flex items-center justify-between">
+        <button id="selVisible" class="xlink" type="button">Görünenleri seç</button>
+        <button id="selClear" class="xlink" type="button">Seçimi temizle</button>
+      </div>
+    </div>
   </nav>
+  <dialog id="exportDlg" class="xdlg" aria-labelledby="xTitle">
+    <div class="sec">
+      <h2 id="xTitle">Onaylanan uygulamalar · Markdown</h2>
+      <p class="muted">Aşağıdaki metni kopyalayın ya da .md dosyası olarak indirin.</p>
+      <textarea id="xText" class="mt-4" readonly aria-label="Markdown çıktısı"></textarea>
+      <div class="flex items-center gap-3 mt-5 flex-wrap">
+        <button id="xCopy" class="btn btn-primary" type="button">Kopyala</button>
+        <a id="xDown" class="btn btn-outline" download="onaylanan-frappe-uygulamalari.md" href="#">İndir (.md)</a>
+        <button id="xClose" class="btn btn-outline ml-auto" type="button">Kapat</button>
+        <span id="xMsg" class="muted" aria-live="polite"></span>
+      </div>
+    </div>
+  </dialog>
   <div id="split" class="shrink-0" role="separator" aria-orientation="vertical" aria-label="Panel genişliği" tabindex="0"></div>
   <main id="detail" class="flex-1 min-w-0 overflow-y-auto scrollbar-thin" aria-live="polite" tabindex="-1"><div class="wrap" id="dbody"></div></main>
 </div>
@@ -6684,7 +6718,11 @@ const JOURNEYS = [
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = n => n == null ? '–' : Number(n).toLocaleString('tr-TR');
-const state = { q:'', cat:'', mat:'', ver:'', lic:'', own:'', feat:'', pinned:null, hover:null, visible:[] };
+const state = { q:'', cat:'', mat:'', ver:'', lic:'', own:'', feat:'', pinned:null, hover:null, visible:[], sel: new Set() };
+try { JSON.parse(localStorage.getItem('atlas.sel') || '[]').forEach(id => byId[id] && state.sel.add(id)); } catch (_) {}
+function saveSel() { try { localStorage.setItem('atlas.sel', JSON.stringify([...state.sel])); } catch (_) {} updateSelUI(); }
+function updateSelUI() { const n = state.sel.size; $('#selCount').textContent = n ? `${n} onaylı` : 'onaylı yok'; $('#exportBtn').disabled = !n; }
+function toggleSel(id, on) { if (on) state.sel.add(id); else state.sel.delete(id); saveSel(); const a = $('#list a[data-id="' + id + '"]'); a && a.classList.toggle('sel', on); }
 const labelCat = c => (DATA.find(x => x.cat === c) || {}).catLabel || c;
 
 function matches(d) {
@@ -6717,13 +6755,14 @@ function renderList() {
     html += `<div class="group">${esc(labelCat(c))} · ${groups[c].length}</div>`;
     groups[c].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'tr')).forEach(d => {
       const cur = (state.pinned || state.hover) === d.id;
-      html += `<a href="#" data-id="${d.id}" role="option" aria-selected="${state.pinned === d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''}"><span class="lv" aria-hidden="true" style="background:var(${MAT[d.maturity].v})"></span><span class="name">${hl(d.name)}</span><span class="lvt">${esc(MAT[d.maturity].l)}</span></a>`; }); });
+      html += `<div class="row"><label class="ck"><input type="checkbox" data-sel="${d.id}" ${state.sel.has(d.id) ? 'checked' : ''} aria-label="${esc(d.name)} uygulamasını onayla"></label><a href="#" data-id="${d.id}" role="option" aria-selected="${state.pinned === d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''} ${state.sel.has(d.id) ? 'sel' : ''}"><span class="lv" aria-hidden="true" style="background:var(${MAT[d.maturity].v})"></span><span class="name">${hl(d.name)}</span><span class="lvt">${esc(MAT[d.maturity].l)}</span></a></div>`; }); });
   if (!vis.length) html = '<div class="p-8 text-center" style="color:var(--rail-muted)">Eşleşen uygulama yok.</div>';
   $('#list').innerHTML = html; $('#shown').textContent = `${vis.length} / ${DATA.length} uygulama`;
   $('#list').querySelectorAll('a[data-id]').forEach(a => {
     const preview = () => { if (!state.pinned) { state.hover = a.dataset.id; show(a.dataset.id, false); markActive(); } };
     a.addEventListener('mouseenter', preview); a.addEventListener('focus', preview);
     a.addEventListener('click', e => { e.preventDefault(); togglePin(a.dataset.id); }); });
+  $('#list').querySelectorAll('input[data-sel]').forEach(cb => cb.addEventListener('change', () => toggleSel(cb.dataset.sel, cb.checked)));
   if (state.pinned && !state.visible.includes(state.pinned)) state.pinned = null;
 }
 function markActive() { const cur = state.pinned || state.hover; $('#list').querySelectorAll('a[data-id]').forEach(a => { a.classList.toggle('active', a.dataset.id === cur); a.classList.toggle('pinned', a.dataset.id === state.pinned); a.setAttribute('aria-selected', String(a.dataset.id === state.pinned)); }); }
@@ -6857,10 +6896,10 @@ $('#home').onclick = () => { state.pinned = null; state.hover = null; markActive
 document.addEventListener('keydown', e => {
   if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); $('#q').select(); return; }
   if (e.key === 'Escape') { if (document.activeElement === $('#q')) $('#q').blur(); state.pinned = null; markActive(); if (state.hover) show(state.hover, false); return; }
-  if (['ArrowDown','ArrowUp'].includes(e.key)) { e.preventDefault(); let i = state.visible.indexOf(state.pinned || state.hover);
+  if (['ArrowDown','ArrowUp'].includes(e.key) && !$('#exportDlg').open && !['SELECT','INPUT','TEXTAREA'].includes(document.activeElement.tagName)) { e.preventDefault(); let i = state.visible.indexOf(state.pinned || state.hover);
     i = e.key === 'ArrowDown' ? Math.min(state.visible.length - 1, i + 1) : Math.max(0, i - 1); const id = state.visible[i]; if (!id) return;
     state.hover = id; if (state.pinned) state.pinned = id; show(id, !!state.pinned); markActive(); const a = $('#list a[data-id="' + id + '"]'); a && a.scrollIntoView({block:'nearest'}); }
-  if (e.key === 'Enter' && document.activeElement !== $('#q')) { const cur = state.pinned || state.hover; if (cur) togglePin(cur); }
+  if (e.key === 'Enter' && document.activeElement !== $('#q') && !$('#exportDlg').open && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'BUTTON' && document.activeElement.tagName !== 'SUMMARY') { const cur = state.pinned || state.hover; if (cur) togglePin(cur); }
 });
 (() => { const split = $('#split'), left = $('#rail'); let dragging = false;
   split.addEventListener('pointerdown', e => { dragging = true; split.setPointerCapture(e.pointerId); document.body.style.userSelect = 'none'; });
@@ -6872,7 +6911,22 @@ document.addEventListener('keydown', e => {
   try { const s = localStorage.getItem('atlas.dark'); dark = s == null ? matchMedia('(prefers-color-scheme: dark)').matches : s === '1'; } catch (_) {}
   const apply = () => { root.setAttribute('data-theme', dark ? 'business' : 'corporate'); root.style.colorScheme = dark ? 'dark' : 'light'; }; apply(); t.checked = dark;
   t.addEventListener('change', () => { dark = t.checked; apply(); try { localStorage.setItem('atlas.dark', dark ? '1' : '0'); } catch (_) {} }); })();
-renderList(); showHome();
+function buildMarkdown() {
+  const rows = DATA.filter(d => state.sel.has(d.id));
+  const lines = ['# Onaylanan Frappe uygulamaları', '', `Tarih: ${new Date().toISOString().slice(0, 10)} · ${rows.length} uygulama`, '', '| Proje adı | Repo URL |', '|---|---|'];
+  rows.forEach(d => lines.push(`| ${d.name.replace(/\|/g, '\\|')} | ${d.url || 'repo bulunamadı'} |`));
+  lines.push('', '## Liste', '');
+  rows.forEach(d => lines.push(`- ${d.name} — ${d.url || 'repo bulunamadı'}`));
+  return lines.join('\n') + '\n';
+}
+$('#exportBtn').addEventListener('click', () => { const md = buildMarkdown(); $('#xText').value = md; $('#xMsg').textContent = '';
+  try { const a = $('#xDown'); if (a._url) URL.revokeObjectURL(a._url); a._url = URL.createObjectURL(new Blob([md], {type: 'text/markdown;charset=utf-8'})); a.href = a._url; } catch (_) {}
+  $('#exportDlg').showModal(); $('#xText').focus(); $('#xText').select(); });
+$('#xCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#xText').value); $('#xMsg').textContent = 'Kopyalandı.'; } catch (_) { $('#xText').select(); document.execCommand && document.execCommand('copy'); $('#xMsg').textContent = 'Metin seçildi; Ctrl/Cmd+C ile kopyalayın.'; } });
+$('#xClose').addEventListener('click', () => $('#exportDlg').close());
+$('#selVisible').addEventListener('click', () => { state.visible.forEach(id => state.sel.add(id)); saveSel(); renderList(); });
+$('#selClear').addEventListener('click', () => { state.sel.clear(); saveSel(); renderList(); });
+renderList(); showHome(); updateSelUI();
 </script>
 </body>
 </html>
