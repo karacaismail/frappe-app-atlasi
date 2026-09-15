@@ -6545,9 +6545,9 @@ details.collapse summary {
   #list a.item:hover { background: var(--rail-hover); }
   #list a.item.active { background: var(--rail-hover); }
   #list a.item.pinned { background: var(--rail-sel); color: var(--rail-sel-fg); }
-  #list a.item .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-  #list a.item .lv { width: 10px; height: 10px; border-radius: 999px; flex: none; }
-  #list a.item .lvt { color: var(--rail-muted); font-family: Roboto, sans-serif; }
+  #list a.item .name { flex: 1; min-width: 0; line-height: 1.35; overflow-wrap: anywhere; }
+  #list a.item .lvt { color: var(--rail-muted); font-family: Roboto, sans-serif; display: inline-flex; align-items: center; gap: 8px; flex: none; white-space: nowrap; }
+  #list a.item .lvt .lv { width: 9px; height: 9px; border-radius: 999px; flex: none; }
   #list a.item.pinned .lvt { color: var(--rail-sel-fg); }
   .railfoot { border-top: 1px solid var(--rail-line); color: var(--rail-muted); background: var(--rail-bg); position: sticky; bottom: 0; }
   .row { display: flex; align-items: stretch; gap: 2px; }
@@ -6636,7 +6636,7 @@ details.collapse summary {
   <label class="ml-auto flex items-center gap-3 muted cursor-pointer select-none min-h-[44px] px-2"><input type="checkbox" id="themeToggle" class="toggle toggle-lg"><span>Koyu tema</span></label>
 </header>
 <div class="flex flex-1 min-h-0">
-  <nav id="rail" class="flex flex-col shrink-0" style="width:340px;min-width:280px;max-width:50vw" aria-label="Uygulama listesi ve filtreler">
+  <nav id="rail" class="flex flex-col shrink-0" style="width:440px;min-width:360px;max-width:55vw" aria-label="Uygulama listesi ve filtreler">
     <div class="px-5 pt-5 pb-3 grid gap-3">
       <label class="relative block"><span class="sr-only">Uygulama ara</span><span class="absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--rail-muted)"><svg class="ic opacity-50" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg></span><input id="q" class="field" style="padding-left:2.6rem" placeholder="Uygulama ara" autocomplete="off"></label>
       <label><span class="sr-only">Kategori</span><select id="fCat" class="field"></select></label>
@@ -6755,7 +6755,7 @@ function renderList() {
     html += `<div class="group">${esc(labelCat(c))} · ${groups[c].length}</div>`;
     groups[c].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'tr')).forEach(d => {
       const cur = (state.pinned || state.hover) === d.id;
-      html += `<div class="row"><label class="ck"><input type="checkbox" data-sel="${d.id}" ${state.sel.has(d.id) ? 'checked' : ''} aria-label="${esc(d.name)} uygulamasını onayla"></label><a href="#" data-id="${d.id}" role="option" aria-selected="${state.pinned === d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''} ${state.sel.has(d.id) ? 'sel' : ''}"><span class="lv" aria-hidden="true" style="background:var(${MAT[d.maturity].v})"></span><span class="name">${hl(d.name)}</span><span class="lvt">${esc(MAT[d.maturity].l)}</span></a></div>`; }); });
+      html += `<div class="row"><label class="ck"><input type="checkbox" data-sel="${d.id}" ${state.sel.has(d.id) ? 'checked' : ''} aria-label="${esc(d.name)} uygulamasını onayla"></label><a href="#" data-id="${d.id}" role="option" aria-selected="${state.pinned === d.id}" class="item ${cur ? 'active' : ''} ${state.pinned === d.id ? 'pinned' : ''} ${state.sel.has(d.id) ? 'sel' : ''}"><span class="name">${hl(d.name)}</span><span class="lvt"><span class="lv" aria-hidden="true" style="background:var(${MAT[d.maturity].v})"></span>${esc(MAT[d.maturity].l)}</span></a></div>`; }); });
   if (!vis.length) html = '<div class="p-8 text-center" style="color:var(--rail-muted)">Eşleşen uygulama yok.</div>';
   $('#list').innerHTML = html; $('#shown').textContent = `${vis.length} / ${DATA.length} uygulama`;
   $('#list').querySelectorAll('a[data-id]').forEach(a => {
@@ -6903,10 +6903,10 @@ document.addEventListener('keydown', e => {
 });
 (() => { const split = $('#split'), left = $('#rail'); let dragging = false;
   split.addEventListener('pointerdown', e => { dragging = true; split.setPointerCapture(e.pointerId); document.body.style.userSelect = 'none'; });
-  split.addEventListener('pointermove', e => { if (!dragging) return; left.style.width = Math.max(280, Math.min(window.innerWidth * 0.5, e.clientX)) + 'px'; });
+  split.addEventListener('pointermove', e => { if (!dragging) return; left.style.width = Math.max(360, Math.min(window.innerWidth * 0.55, e.clientX)) + 'px'; });
   split.addEventListener('pointerup', () => { dragging = false; document.body.style.userSelect = ''; try { localStorage.setItem('atlas.left', left.style.width); } catch (_) {} });
-  split.addEventListener('keydown', e => { const w = left.getBoundingClientRect().width; if (e.key === 'ArrowLeft') left.style.width = Math.max(280, w - 24) + 'px'; if (e.key === 'ArrowRight') left.style.width = Math.min(window.innerWidth * 0.5, w + 24) + 'px'; });
-  try { const w = localStorage.getItem('atlas.left'); if (w) left.style.width = w; } catch (_) {} })();
+  split.addEventListener('keydown', e => { const w = left.getBoundingClientRect().width; if (e.key === 'ArrowLeft') left.style.width = Math.max(360, w - 24) + 'px'; if (e.key === 'ArrowRight') left.style.width = Math.min(window.innerWidth * 0.5, w + 24) + 'px'; });
+  try { const w = parseInt(localStorage.getItem('atlas.left') || '0'); if (w >= 360) left.style.width = w + 'px'; } catch (_) {} })();
 (() => { const root = document.documentElement, t = $('#themeToggle'); let dark = false;
   try { const s = localStorage.getItem('atlas.dark'); dark = s == null ? matchMedia('(prefers-color-scheme: dark)').matches : s === '1'; } catch (_) {}
   const apply = () => { root.setAttribute('data-theme', dark ? 'business' : 'corporate'); root.style.colorScheme = dark ? 'dark' : 'light'; }; apply(); t.checked = dark;
