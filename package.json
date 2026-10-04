@@ -1,0 +1,11 @@
+{
+  "name": "frappe-app-atlasi",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "test": "node tests/atlas.cjs && node tests/research.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
